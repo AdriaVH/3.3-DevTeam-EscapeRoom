@@ -1,24 +1,15 @@
-public class DecorationItem {
-    public String name;
-    public String description;
-    public Material material;
-    public Theme theme;
-    public double price;
+import java.math.BigDecimal;
 
-    public DecorationItem(String name, String description, Material material, Theme theme, double price) {
-        this.name = name;
-        this.description = description;
+public class DecorationItem extends Item {
+    private Material material;
+    private Theme theme;
+    private BigDecimal price;
+
+    public DecorationItem(int roomId, String name, String description, Material material, Theme theme, BigDecimal price) {
+        super(roomId, name, description);
         this.material = material;
         this.theme = theme;
         this.price = price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public Material getMaterial() {
@@ -29,7 +20,7 @@ public class DecorationItem {
         return theme;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 }
