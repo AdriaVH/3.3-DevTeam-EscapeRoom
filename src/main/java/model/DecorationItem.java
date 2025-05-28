@@ -1,3 +1,5 @@
+package model;
+
 import java.math.BigDecimal;
 
 public class DecorationItem extends Item {
