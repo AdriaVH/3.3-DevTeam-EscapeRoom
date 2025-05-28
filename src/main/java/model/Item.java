@@ -1,3 +1,5 @@
+package model;
+
 public abstract class Item {
     private int id;
     private int roomId;
