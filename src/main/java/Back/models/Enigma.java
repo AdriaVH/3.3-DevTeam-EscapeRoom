@@ -1,4 +1,4 @@
-package model;
+package Back.models;
 
 public class Enigma extends Item {
     private int id;

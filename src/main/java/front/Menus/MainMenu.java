@@ -1,4 +1,4 @@
-package UI;
+package front.Menus;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
