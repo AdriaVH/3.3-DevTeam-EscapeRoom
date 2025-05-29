@@ -1,4 +1,4 @@
-package model;
+package Back.models;
 
 public abstract class Item {
     private int id;

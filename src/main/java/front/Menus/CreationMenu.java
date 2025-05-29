@@ -1,4 +1,4 @@
-package UI;
+package front.Menus;
 
 public class CreationMenu {
 
