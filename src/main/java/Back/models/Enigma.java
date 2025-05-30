@@ -1,5 +1,9 @@
 package Back.models;
 
+import front.Menus.reusableMenuTest.MenuOption;
+
+import java.util.List;
+
 public class Enigma extends Item {
     private int id;
     private int item_Id;
@@ -8,6 +12,11 @@ public class Enigma extends Item {
 
     public int getId() {
         return id;
+    }
+
+    @Override
+    public List<MenuOption> getListModifyMenu() {
+        return List.of();
     }
 
     public void setId(int id) {
@@ -35,6 +44,7 @@ public class Enigma extends Item {
         this.item_Id = builder.item_Id;
         this.theme = builder.theme;
     }
+
 
     public static class Builder {
         private int id;

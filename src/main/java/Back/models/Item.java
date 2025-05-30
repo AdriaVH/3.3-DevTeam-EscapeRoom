@@ -1,5 +1,9 @@
 package Back.models;
 
+import front.Menus.reusableMenuTest.MenuOption;
+
+import java.util.List;
+
 public abstract class Item {
     private int id;
     private int roomId;
@@ -14,6 +18,32 @@ public abstract class Item {
         this.description = description;
     }
 
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", roomId=" + roomId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setRoomId(int roomId) {
+        this.roomId = roomId;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public int getId() {
         return id; }
     public int getRoomId() {
@@ -22,4 +52,6 @@ public abstract class Item {
         return name; }
     public String getDescription() {
         return description; }
+
+    public abstract List<MenuOption> getListModifyMenu();
 }

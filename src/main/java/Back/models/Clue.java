@@ -1,6 +1,7 @@
 package Back.models;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public class Clue extends Item {
     private int id;
@@ -57,6 +58,10 @@ public class Clue extends Item {
         this.theme=builder.theme;
         this.price=builder.price;
 
+    }
+
+    public List getListModifyMenu(){
+        return List.of();
     }
 
     private static class Builder{
