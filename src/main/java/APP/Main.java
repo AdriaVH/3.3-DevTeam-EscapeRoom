@@ -15,6 +15,6 @@ public class Main {
         //toni.trial();
         //adria.trial();
         //ignasi.trial();
-        //alex.trial();
+        alex.trial();
     }
 }
