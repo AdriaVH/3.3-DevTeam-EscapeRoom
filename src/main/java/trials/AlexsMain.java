@@ -1,6 +1,5 @@
 package trials;
 
-import ConnectionDB.ReadDatabase;
 import front.Menus.MenuSQL;
 
 
@@ -9,7 +8,12 @@ public class AlexsMain implements functionTrial {
 
     @Override
     public void trial() {
-        ReadDatabase app = new ReadDatabase();
-        new MenuSQL().start();
+        if (!ConnectionDB.DatabaseConnection.testConnection()) {
+            System.out.println("❌ Cannot continue, exiting...");
+            return;
+        }
+
+        front.Menus.MenuSQL menu = new front.Menus.MenuSQL();
+        menu.start();
     }
 }

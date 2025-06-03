@@ -4,10 +4,22 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
+    private static final EnvLoader env = EnvLoader.getInstance();
+
     public static Connection getConnection() throws SQLException {
-        String url = ConfigReader.get("db.url");
-        String user = ConfigReader.get("db.user");
-        String password = ConfigReader.get("db.password");
-        return DriverManager.getConnection(url, user, password);
+        return DriverManager.getConnection(
+                env.getDbUrl(),
+                env.getDbUser(),
+                env.getDbPassword()
+        );
+    }
+    public static boolean testConnection() {
+        try (Connection conn = getConnection()) {
+            System.out.println("✅ Database connection successful!");
+            return true;
+        } catch (SQLException e) {
+            System.err.println("❌ Database connection failed: " + e.getMessage());
+            return false;
+        }
     }
 }
