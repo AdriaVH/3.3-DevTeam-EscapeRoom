@@ -1,6 +1,7 @@
 package front.Menus;
 
 import ConnectionDB.SQLExecutor;
+
 import java.util.Scanner;
 
 public class MenuSQL {
@@ -78,10 +79,11 @@ public class MenuSQL {
                     executor.executeUpdate(sql, values);
                 }
                 case 3 -> {
-                    String sql = buildUpdateSQL(table, fields);
-                    String[] values = getUserInputs(fields);
+                    executor.executeQuery("SELECT * FROM " + table);
                     System.out.print("Enter ID to update: ");
                     String id = scanner.nextLine();
+                    String sql = buildUpdateSQL(table, fields);
+                    String[] values = getUserInputs(fields);
                     String[] params = new String[values.length + 1];
                     System.arraycopy(values, 0, params, 0, values.length);
                     params[values.length] = id;
@@ -101,7 +103,7 @@ public class MenuSQL {
         for (int i = 0; i < fields.length; i++) {
             System.out.print("Enter " + fields[i] + ": ");
             values[i] = scanner.nextLine();
-            values[i] = values[i].isEmpty() ? null : values[i] ;
+            values[i] = values[i].isEmpty() ? null : values[i];
         }
         return values;
     }
