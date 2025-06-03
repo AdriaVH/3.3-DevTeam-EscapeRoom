@@ -19,6 +19,11 @@ public class Room {
         this.items= new ArrayList<>();
     }
 
+    //ENUM ENCAPSULAT
+    public enum Difficult {
+        EASY, MEDIUM , HARD;
+    }
+
     public Difficult getDifficult() {
         return difficult;
     }

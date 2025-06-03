@@ -14,6 +14,11 @@ public class DecorationItem extends Item {
         this.price = price;
     }
 
+    //ENUM ENCAPSULAT
+    public enum Material {
+        WOOD, METAL, PLASTIC, PAPER, CRYSTAL;
+    }
+
     public Material getMaterial() {
         return material;
     }
