@@ -1,5 +1,7 @@
 package front.Menus.reusableMenuTest;
 
+import Back.models.Item;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -50,6 +52,14 @@ public class ReusableMenu {
                 return -1;                              // force “invalid choice”
             }
         }
+    public List getListModifyMenu(Item item){
+        List list = List.of(
+                new MenuOption("Modify name", () -> dao.modify(item)),
+                new MenuOption("Modify description", () -> recieveDescription()),
+                new MenuOption("Back", () -> {}));
+
+        return list;
+    };
     }
 
 

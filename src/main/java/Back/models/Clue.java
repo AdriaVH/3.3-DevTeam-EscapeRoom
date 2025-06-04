@@ -60,10 +60,6 @@ public class Clue extends Item {
 
     }
 
-    public List getListModifyMenu(){
-        return List.of();
-    }
-
     private static class Builder{
         private int id;
         private int enigma_Id;

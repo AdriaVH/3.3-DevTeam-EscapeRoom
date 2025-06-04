@@ -18,15 +18,7 @@ public class DecorationItem extends Item {
         this.theme = theme;
         this.price = price;
     }
-    @Override
-    public List getListModifyMenu(){
-        List list = List.of(
-                new MenuOption("Modify name", () -> recieveName()),
-                new MenuOption("Modify description", () -> recieveDescription()),
-                new MenuOption("Back", () -> {}));
 
-        return list;
-    };
 
     @Override
     public String toString() {

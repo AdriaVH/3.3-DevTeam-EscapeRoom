@@ -14,11 +14,6 @@ public class Enigma extends Item {
         return id;
     }
 
-    @Override
-    public List<MenuOption> getListModifyMenu() {
-        return List.of();
-    }
-
     public void setId(int id) {
         this.id = id;
     }

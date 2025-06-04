@@ -53,5 +53,4 @@ public abstract class Item {
     public String getDescription() {
         return description; }
 
-    public abstract List<MenuOption> getListModifyMenu();
 }
