@@ -15,13 +15,13 @@ public class AdriasMain implements functionTrial {
     @Override
     public void trial() {
         List<Item> decoItems = new ArrayList<>();
-        DecorationItem tree = new DecorationItem(2, "Tree", "jhjg", Material.CRYSTAL, Theme.HAUNTED_MANSION, BigDecimal.valueOf(12.99));
+        DecorationItem tree = new DecorationItem("Tree", 2, "jhjg", Material.CRYSTAL, Theme.HAUNTED_MANSION, BigDecimal.valueOf(12.99));
         decoItems.add(tree);
 
         List<ReusableMenu> listOfDecorMenus = new ArrayList<>();
         ReusableMenu creationMenu = createMenu("Create an Item", MenuAction.CREATE);
-        ReusableMenu modifyMenu = makeItemMenuList("Create an Item", decoItems, MenuAction.MODIFY);
-        ReusableMenu viewMenu = makeItemMenuList("View Items", decoItems, MenuAction.VIEW);
+        ReusableMenu modifyMenu = modifyMenu("Modify an Item", decoItems, MenuAction.MODIFY);
+        ReusableMenu viewMenu = modifyMenu("View Items", decoItems, MenuAction.VIEW);
 
         listOfDecorMenus.add(modifyMenu);
         listOfDecorMenus.add(viewMenu);
@@ -45,26 +45,28 @@ public class AdriasMain implements functionTrial {
         }
     }
 
-    private ReusableMenu createMenu(String createAnItem, MenuAction menuAction) {
-        Item item = null;
-        return new ReusableMenu(createAnItem, List.of(new MenuOption("", getAction(item, menuAction))));
-    }
 
-    private Runnable getAction(Item item, MenuAction action) {
+
+    private <T> Runnable getAction(T gen, MenuAction action) {
         switch (action) {
             case CREATE:
-                return () -> ServiceDecorationItem.insert((DecorationItem) item);
+                return () -> new ServiceItem().create((DecorationItem) gen);
             case MODIFY:
-                return () -> System.out.println();//menu.show();
+                return () -> System.out.println("Modifyyyyyy");
             case VIEW:
-                return () -> System.out.println(item.toString());
+                return () -> System.out.println(gen.toString());
             //case DELETE: return () -> item.delete();
             default:
                 return () -> System.out.println();//menu.show();
         }
     }
 
-    public ReusableMenu makeItemMenuList(String label, List<Item> list, MenuAction action) {
+    private ReusableMenu createMenu(String createAnItem, MenuAction menuAction) {
+        Item item = null;
+        return new ReusableMenu(createAnItem, List.of(new MenuOption("", getAction(item, menuAction))));
+    }
+
+    public ReusableMenu modifyMenu(String label, List<Item> list, MenuAction action) {
         List<MenuOption> modifyList = new ArrayList();
         Runnable r;
 

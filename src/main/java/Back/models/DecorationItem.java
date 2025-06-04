@@ -1,9 +1,6 @@
 package Back.models;
 
-import front.Menus.reusableMenuTest.MenuOption;
-
 import java.math.BigDecimal;
-import java.util.List;
 
 import static APP.Main.scanner;
 
@@ -12,7 +9,7 @@ public class DecorationItem extends Item {
     private Theme theme;
     private BigDecimal price;
 
-    public DecorationItem(int roomId, String name, String description, Material material, Theme theme, BigDecimal price) {
+    public DecorationItem(String name, int roomId, String description, Material material, Theme theme, BigDecimal price) {
         super(roomId, name, description);
         this.material = material;
         this.theme = theme;
