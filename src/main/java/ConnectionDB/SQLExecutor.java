@@ -1,5 +1,7 @@
 package ConnectionDB;
 
+import observer.NotificationService;
+
 import java.sql.*;
 
 public class SQLExecutor {
@@ -24,7 +26,7 @@ public class SQLExecutor {
         }
     }
 
-    public void executeUpdate(String sql, String... params) {
+    public void executeUpdate(String sql, String strng,Object c,String... params) {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
             for (int i = 0; i < params.length; i++) {
@@ -36,6 +38,7 @@ public class SQLExecutor {
             }
             int rows = stmt.executeUpdate();
             System.out.println("✅ Operation successful. Rows affected: " + rows);
+            NotificationService.getInstance().notifyObservers(strng,c);
         } catch (SQLException e) {
             System.err.println("❌ Error: " + e.getMessage());
         }
