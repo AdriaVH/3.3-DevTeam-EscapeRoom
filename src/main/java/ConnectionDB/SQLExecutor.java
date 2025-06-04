@@ -4,20 +4,23 @@ import java.sql.*;
 
 public class SQLExecutor {
 
-    public void executeQuery(String sql) {
+    public ResultSet executeQuery(String sql) {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql);
              ResultSet rs = stmt.executeQuery()) {
             ResultSetMetaData meta = rs.getMetaData();
-            int cols = meta.getColumnCount();
+            /*int cols = meta.getColumnCount();
             while (rs.next()) {
                 for (int i = 1; i <= cols; i++) {
                     System.out.print(meta.getColumnName(i) + ": " + rs.getString(i) + "\t");
                 }
                 System.out.println();
-            }
+            }*/
+            return rs;
+
         } catch (SQLException e) {
             System.err.println("❌ Error: " + e.getMessage());
+            return null;
         }
     }
 

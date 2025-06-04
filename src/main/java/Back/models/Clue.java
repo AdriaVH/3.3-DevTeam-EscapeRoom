@@ -10,6 +10,12 @@ public class Clue extends Item {
     private Theme theme;
     private BigDecimal price;
 
+    public Clue(int id, int enigmaId, int itemId, String theme, BigDecimal price) {
+    }
+
+    public Clue(int enigmaId, int itemId, String theme, BigDecimal price) {
+    }
+
 
     public int getEnigma_Id() {
         return enigma_Id;
@@ -51,7 +57,7 @@ public class Clue extends Item {
         this.theme = theme;
     }
 
-    private Clue (Builder builder) {
+    /*private Clue (Builder builder) {
         this.id=builder.id;
         this.enigma_Id=builder.enigma_Id;
         this.item_Id=builder.item_Id;
@@ -84,5 +90,5 @@ public class Clue extends Item {
 
         public Clue build() {
             return new Clue(this); }
-    }
+    }*/
 }
