@@ -23,9 +23,12 @@ public class AdriasMain implements functionTrial {
         ReusableMenu modifyMenu = modifyMenu("Modify an Item", decoItems, MenuAction.MODIFY);
         ReusableMenu viewMenu = modifyMenu("View Items", decoItems, MenuAction.VIEW);
 
+        listOfDecorMenus.add(creationMenu);
         listOfDecorMenus.add(modifyMenu);
         listOfDecorMenus.add(viewMenu);
-        listOfDecorMenus.add(creationMenu);
+
+
+
         ReusableMenu decorMenu = arrayOfMenusToMenu("Decoration Items", listOfDecorMenus);
 
         ReusableMenu fakeMainMenu = new ReusableMenu("Objects Menu", List.of(
@@ -52,7 +55,7 @@ public class AdriasMain implements functionTrial {
             case CREATE:
                 return () -> new ServiceItem().create((DecorationItem) gen);
             case MODIFY:
-                return () -> System.out.println("Modifyyyyyy");
+                return () -> new ServiceItem().update((DecorationItem) gen);
             case VIEW:
                 return () -> System.out.println(gen.toString());
             //case DELETE: return () -> item.delete();
@@ -63,7 +66,7 @@ public class AdriasMain implements functionTrial {
 
     private ReusableMenu createMenu(String createAnItem, MenuAction menuAction) {
         Item item = null;
-        return new ReusableMenu(createAnItem, List.of(new MenuOption("", getAction(item, menuAction))));
+        return new ReusableMenu(createAnItem, List.of(new MenuOption("Create", getAction(item, menuAction))));
     }
 
     public ReusableMenu modifyMenu(String label, List<Item> list, MenuAction action) {

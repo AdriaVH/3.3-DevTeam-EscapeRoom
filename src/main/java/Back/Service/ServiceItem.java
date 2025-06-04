@@ -17,8 +17,16 @@ public class ServiceItem {
         decoItemDAO.insert(item);
 
     }
-    public DecorationItem fillItem() {
 
+    public void update(DecorationItem item) {
+        DecorationItemDAO decoItemDAO = new DecorationItemDAO();
+        item = fillItem();
+
+        decoItemDAO.update(item);
+    }
+
+    public DecorationItem fillItem() {
+        try {
             System.out.print("Enter Name: ");
             String name = scanner.nextLine();
             System.out.print("Enter Room Id: ");
@@ -32,6 +40,12 @@ public class ServiceItem {
             System.out.print("Enter price: ");
             BigDecimal price = BigDecimal.valueOf(Long.parseLong(scanner.nextLine()));
 
-        return new DecorationItem(name, roomId, description, material, theme, price);
+            return new DecorationItem(name, roomId, description, material, theme, price);
+
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
     }
 }
