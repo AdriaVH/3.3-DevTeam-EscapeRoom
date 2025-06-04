@@ -7,6 +7,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import static front.Menus.reusableMenuTest.ReusableMenu.getListModifyMenu;
+
 public class AdriasMain implements functionTrial {
 
     @Override
@@ -56,7 +58,7 @@ public class AdriasMain implements functionTrial {
         Runnable r;
 
         for (Item item : list) {
-            ReusableMenu objectMenu = new ReusableMenu(item.getName(), item.getListModifyMenu());
+            ReusableMenu objectMenu = new ReusableMenu(item.getName(), getListModifyMenu(item));
 
             r = getAction(item, objectMenu, action);
             modifyList.add(new MenuOption(item.getName(), r));

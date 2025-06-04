@@ -1,7 +1,5 @@
 package trials;
 
-import front.Menus.MainMenu;
-
 public class TonisMain implements functionTrial {
 
     public void trial () {

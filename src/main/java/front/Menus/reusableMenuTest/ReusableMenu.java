@@ -52,10 +52,10 @@ public class ReusableMenu {
                 return -1;                              // force “invalid choice”
             }
         }
-    public List getListModifyMenu(Item item){
+    public static List getListModifyMenu(Item item){
         List list = List.of(
-                new MenuOption("Modify name", () -> dao.modify(item)),
-                new MenuOption("Modify description", () -> recieveDescription()),
+                new MenuOption("Modify name", () -> System.out.println("modify function") /*dao.modify(item)*/),
+                new MenuOption("Modify description", () -> System.out.println("modify function") /*recieveDescription()*/),
                 new MenuOption("Back", () -> {}));
 
         return list;

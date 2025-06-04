@@ -19,7 +19,7 @@ public class Main {
         IgnasisMain ignasi = new IgnasisMain();
 
         //toni.trial();
-        //adria.trial();
+        adria.trial();
         //ignasi.trial();
         //alex.trial();
     }
