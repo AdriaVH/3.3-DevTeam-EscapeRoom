@@ -21,7 +21,7 @@ public class DecorationItemManager {
         String description = InputHandler.readString("Enter description");
         BigDecimal price = InputHandler.readBigDecimal("Enter price: ");
 
-        DecorationItem item = new DecorationItem(name,description,roomId,material,theme,price);
+        DecorationItem item = new DecorationItem(roomId,name,material,theme,description,price);
         try {
             dao.insert(item);
             NotificationService.getInstance()
@@ -52,7 +52,7 @@ public class DecorationItemManager {
         String description = InputHandler.readString("Enter a new description");
         BigDecimal price = InputHandler.readBigDecimal("Enter a new price: ");
 
-        DecorationItem item = new DecorationItem(name,description,roomId,material,theme,price);
+        DecorationItem item = new DecorationItem(roomId,name,material,theme,description,price);
         item.setId(id);
         try {
             dao.update(item);

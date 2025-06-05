@@ -4,7 +4,9 @@ public class ScapeRoom {
     private int id;
     private String name;
 
-    public ScapeRoom() {
+    public ScapeRoom(int id, String name) {
+        this.id = id;
+        this.name = name;
     }
 
     public ScapeRoom(String name) {

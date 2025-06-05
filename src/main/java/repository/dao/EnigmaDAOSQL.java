@@ -35,12 +35,12 @@ public class EnigmaDAOSQL implements EnigmaDAO {
 
         try {
             while (rs.next()) {
-                Enigma enigma = new Enigma();
-                enigma.setId(rs.getInt("id"));
-                enigma.setRoomId(rs.getInt("roomId"));
-                enigma.setName(rs.getString("name"));
-                enigma.setTheme(Theme.valueOf(rs.getString("theme")));
-                enigma.setDescription("description");
+                Enigma enigma = new Enigma(
+                        rs.getInt("id"),
+                        rs.getInt("roomId"),
+                        rs.getString("name"),
+                        Theme.valueOf(rs.getString("theme")),
+                        rs.getString("description"));
                 enigmas.add(enigma);
             }
         } catch (SQLException e) {

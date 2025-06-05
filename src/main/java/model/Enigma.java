@@ -6,16 +6,14 @@ public class Enigma extends Item {
     private int roomId;
     private Theme theme;
 
-    public Enigma() {
-        super();
-    }
+
     public Enigma(int roomId, String name, String description, Theme theme) {
         super(name, description);
         this.roomId = roomId;
         this.theme = theme;
     }
 
-    public Enigma(int roomId, String name, String description, int id, Theme theme) {
+    public Enigma( int id,int roomId, String name,  Theme theme, String description) {
         super(id,name, description);
         this.roomId = roomId;
         this.theme = theme;

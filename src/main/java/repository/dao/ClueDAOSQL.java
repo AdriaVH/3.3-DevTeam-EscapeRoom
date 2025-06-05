@@ -36,13 +36,13 @@ public class ClueDAOSQL implements ClueDAO {
 
         try {
             while (rs.next()) {
-                Clue clue = new Clue();
-                clue.setId(rs.getInt("id"));
-                clue.setEnigmaId(rs.getInt("enigma_id"));
-                clue.setName(rs.getString("name"));
-                clue.setTheme(Theme.valueOf(rs.getString("theme")));
-                clue.setPrice(rs.getBigDecimal("price"));
-                clue.setDescription(rs.getString("description"));
+                Clue clue = new Clue(
+                rs.getInt("id"),
+                rs.getInt("enigma_id"),
+                rs.getString("name"),
+                Theme.valueOf(rs.getString("theme")),
+                rs.getString("description"),
+                rs.getBigDecimal("price"));
                 clues.add(clue);
             }
         } catch (SQLException e) {

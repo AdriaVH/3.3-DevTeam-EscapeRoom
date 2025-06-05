@@ -9,10 +9,16 @@ public class Room {
     private DifficultLevel difficultLevel;
     private Theme theme;
 
-    public Room() {
-    }
+
 
     public Room(int scapeRoomId, DifficultLevel difficultLevel, Theme theme) {
+        this.scapeRoomId = scapeRoomId;
+        this.difficultLevel = difficultLevel;
+        this.theme = theme;
+    }
+
+    public Room(int id, int scapeRoomId, DifficultLevel difficultLevel, Theme theme) {
+        this.id = id;
         this.scapeRoomId = scapeRoomId;
         this.difficultLevel = difficultLevel;
         this.theme = theme;

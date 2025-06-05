@@ -11,11 +11,9 @@ public class DecorationItem extends Item {
     private Theme theme;
     private BigDecimal price;
 
-    public DecorationItem() {
-        super();
-    }
 
-    public DecorationItem(String name, String description, int roomId, Material material, Theme theme, BigDecimal price) {
+
+    public DecorationItem( int roomId,String name, Material material, Theme theme, String description, BigDecimal price) {
         super(name, description);
         this.roomId = roomId;
         this.material = material;
@@ -23,7 +21,7 @@ public class DecorationItem extends Item {
         this.price = price;
     }
 
-    public DecorationItem(int roomId, String name, String description, int id, Material material, Theme theme, BigDecimal price) {
+    public DecorationItem( int id, int roomId, String name, Material material, Theme theme, String description, BigDecimal price) {
         super(id, name, description);
         this.roomId = roomId;
         this.material = material;

@@ -48,7 +48,7 @@ public class ScapeRoomManager {
             NotificationService.getInstance()
                     .notifyObservers("Deleted EscapeRoom: " + id);
         } catch (Exception e) {
-            System.out.println("Error deleting EscapeRoom: " + e.getMessage());
+            System.out.println("Error deleting EscapeRoom with id = : " + e.getMessage());
         }
     }
 }

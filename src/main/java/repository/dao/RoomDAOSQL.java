@@ -31,11 +31,11 @@ public class RoomDAOSQL implements RoomDAO {
 
         try {
             while (rs.next()) {
-                Room room = new Room();
-                room.setId(rs.getInt("id"));
-                room.setScapeRoomId(rs.getInt("scape_room_id"));
-                room.setDifficultLevel(DifficultLevel.valueOf(rs.getString("difficult_level")));
-                room.setTheme(Theme.valueOf(rs.getString("theme")));
+                Room room = new Room(
+                        rs.getInt("id"),
+                        rs.getInt("scape_room_id"),
+                        DifficultLevel.valueOf(rs.getString("difficult_level")),
+                        Theme.valueOf(rs.getString("theme")));
                 rooms.add(room);
             }
         } catch (SQLException e) {

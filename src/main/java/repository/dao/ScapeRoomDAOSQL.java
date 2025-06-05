@@ -28,9 +28,9 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
 
         try {
             while (rs.next()) {
-                ScapeRoom scapeRoom = new ScapeRoom();
-                scapeRoom.setId(rs.getInt("id"));
-                scapeRoom.setName(rs.getString("name"));
+                ScapeRoom scapeRoom = new ScapeRoom(
+                        rs.getInt("id"),
+                        rs.getString("name"));
                 scapeRooms.add(scapeRoom);
             }
         } catch (SQLException e) {
@@ -47,6 +47,9 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
 
     @Override
     public void delete(int id) {
-        executor.executeUpdate("DELETE FROM scaperoom WHERE id = ?", id);
+        int rowsAffected = executor.executeUpdate("DELETE FROM scaperoom WHERE id = ?", id);
+        if (rowsAffected == 0) {
+            throw new RuntimeException(" "+id);
+        }
     }
 }
