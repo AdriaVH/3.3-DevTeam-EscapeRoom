@@ -1,0 +1,73 @@
+package repository.dao;
+
+import db.SQLExecutor;
+import enums.Theme;
+import model.Clue;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+public class ClueDAOSQL implements ClueDAO {
+    private final SQLExecutor executor = SQLExecutor.getInstance();
+
+    @Override
+    public void insert(Clue obj) {
+        executor.executeUpdate(
+                "INSERT INTO clue (name, enigma_id, theme, description, price) VALUES (?, ?, ?, ?, ?)",
+                obj.getName(),
+                obj.getEnigmaId(),
+                obj.getTheme().name(),
+                obj.getDescription(),
+                obj.getPrice()
+        );
+    }
+
+    @Override
+    public List<Clue> findAll() {
+        List<Clue> clues = new ArrayList<>();
+        ResultSet rs = executor.executeQuery("SELECT * FROM clue");
+
+        if (rs == null) {
+            System.err.println("⚠️ ClueDAOSQL.findAll(): ResultSet is null.");
+            return clues;
+        }
+
+        try {
+            while (rs.next()) {
+                Clue clue = new Clue();
+                clue.setId(rs.getInt("id"));
+                clue.setEnigmaId(rs.getInt("enigma_id"));
+                clue.setName(rs.getString("name"));
+                clue.setTheme(Theme.valueOf(rs.getString("theme")));
+                clue.setPrice(rs.getBigDecimal("price"));
+                clue.setDescription(rs.getString("description"));
+                clues.add(clue);
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ Error reading clues: " + e.getMessage());
+        }
+
+        return clues;
+    }
+
+    @Override
+    public void update(Clue obj) {
+        executor.executeUpdate(
+                "UPDATE clue SET id = ?, enigma_id = ?, name = ?, theme = ?, description = ?, price = ? WHERE id = ?",
+                obj.getId(),
+                obj.getEnigmaId(),
+                obj.getName(),
+                obj.getTheme().name(),
+                obj.getDescription(),
+                obj.getPrice(),
+                obj.getId()
+        );
+    }
+
+    @Override
+    public void delete(int id) {
+        executor.executeUpdate("DELETE FROM clue WHERE id = ?", id);
+    }
+}
