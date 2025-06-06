@@ -15,7 +15,7 @@ public class EnigmaDAOSQL implements EnigmaDAO {
     @Override
     public void insert(Enigma obj) {
         executor.executeUpdate(
-                "INSERT INTO enigma (roomId, name, theme, description) VALUES (?, ?, ?, ?)",
+                "INSERT INTO enigma (room_id, name, theme, description) VALUES (?, ?, ?, ?)",
                 obj.getRoomId(),
                 obj.getName(),
                 obj.getTheme().name(),
@@ -37,7 +37,7 @@ public class EnigmaDAOSQL implements EnigmaDAO {
             while (rs.next()) {
                 Enigma enigma = new Enigma(
                         rs.getInt("id"),
-                        rs.getInt("roomId"),
+                        rs.getInt("room_id"),
                         rs.getString("name"),
                         Theme.valueOf(rs.getString("theme")),
                         rs.getString("description"));
@@ -53,7 +53,7 @@ public class EnigmaDAOSQL implements EnigmaDAO {
     @Override
     public void update(Enigma obj) {
         executor.executeUpdate(
-                "UPDATE enigma SET roomId = ?, name = ?, theme = ?, description = ? WHERE id = ?",
+                "UPDATE enigma SET room_id = ?, name = ?, theme = ?, description = ? WHERE id = ?",
                 obj.getRoomId(),
                 obj.getName(),
                 obj.getTheme().name(),
