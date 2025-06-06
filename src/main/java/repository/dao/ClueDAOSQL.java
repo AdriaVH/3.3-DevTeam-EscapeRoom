@@ -48,7 +48,6 @@ public class ClueDAOSQL implements ClueDAO {
         } catch (SQLException e) {
             System.err.println("❌ Error reading clues: " + e.getMessage());
         }
-
         return clues;
     }
 

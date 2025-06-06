@@ -52,6 +52,7 @@ public class SQLExecutor {
             ensureConnection();
             PreparedStatement statement = connection.prepareStatement(sql);
             setParameters(statement, params);
+            System.out.println("Rows modifed: " + statement.executeUpdate());
             return statement.executeUpdate();
         } catch (SQLException e) {
             System.err.println("❌ SQLExecutor.executeUpdate failed: " + e.getMessage());

@@ -39,7 +39,7 @@ public class DecorationItemDAOSQL implements DecorationItemDAO {
             while (rs.next()) {
                 DecorationItem item = new DecorationItem(
                 rs.getInt("id"),
-                rs.getInt("roomId"),
+                rs.getInt("room_Id"),
                 rs.getString("name"),
                 Material.valueOf(rs.getString("material")),
                 Theme.valueOf(rs.getString("theme")),
@@ -57,8 +57,8 @@ public class DecorationItemDAOSQL implements DecorationItemDAO {
     @Override
     public void update(DecorationItem obj) {
         executor.executeUpdate(
-                "UPDATE decorationitem SET id = ?, material = ?, theme = ?, description = ?, price = ? WHERE id = ?",
-                obj.getId(),
+                "UPDATE decorationitem SET name = ?, material = ?, theme = ?, description = ?, price = ? WHERE id = ?",
+                obj.getName(),
                 obj.getMaterial().name(),
                 obj.getTheme().name(),
                 obj.getDescription(),
