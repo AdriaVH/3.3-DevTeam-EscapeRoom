@@ -16,7 +16,8 @@ public class DecorationItemDAOSQL implements DecorationItemDAO {
     @Override
     public void insert(DecorationItem obj) {
         executor.executeUpdate(
-                "INSERT INTO decorationitem (roomId, material, theme, description, price) VALUES (?, ?, ?, ?, ?)",
+                "INSERT INTO decorationitem (name, room_id, material, theme, description, price) VALUES (?, ?, ?, ?, ?, ?)",
+                obj.getName(),
                 obj.getRoomId(),
                 obj.getMaterial().name(),
                 obj.getTheme().name(),
@@ -57,8 +58,9 @@ public class DecorationItemDAOSQL implements DecorationItemDAO {
     @Override
     public void update(DecorationItem obj) {
         executor.executeUpdate(
-                "UPDATE decorationitem SET name = ?, material = ?, theme = ?, description = ?, price = ? WHERE id = ?",
+                "UPDATE decorationitem SET name = ?, room_id = ?, material = ?, theme = ?, description = ?, price = ? WHERE id = ?",
                 obj.getName(),
+                obj.getRoomId(),
                 obj.getMaterial().name(),
                 obj.getTheme().name(),
                 obj.getDescription(),

@@ -9,6 +9,8 @@ import repository.dao.RoomDAO;
 import repository.dao.RoomDAOSQL;
 import util.InputHandler;
 
+import java.util.List;
+
 public class RoomManager {
     private final RoomDAO dao = new RoomDAOSQL();
 
@@ -21,7 +23,7 @@ public class RoomManager {
         try {
             dao.insert(room);
             NotificationService.getInstance()
-                    .notifyObservers("Created new Room: " + room.getId());
+                    .notifyObservers("Created new Room with theme: " + theme +" and difficulty: "+level);
         } catch (Exception e) {
             System.out.println("Error creating Room: " + e.getMessage());
         }
@@ -37,7 +39,14 @@ public class RoomManager {
     }
 
     public void updateRoom() {
-        int id = InputHandler.readInt("Enter Room ID to update: ");
+        List<Room> rooms = dao.findAll();
+        if (rooms.isEmpty()) {
+            System.out.println("There are no Rooms available to update.");
+            return;
+        }
+        System.out.println("Available Rooms:");
+        rooms.forEach(r -> System.out.println("  " + r.getId() + " → " + r.getTheme()+" → " + r.getDifficultLevel()));
+        int id = InputHandler.readOptionalInt("Enter Room ID to update (or press Enter to skip): ");
         int scapeRoomId = InputHandler.readInt("Enter new ScapeRoom ID: ");
         DifficultLevel level = InputHandler.readEnum(DifficultLevel.class, "Enter new difficulty level: ");
         Theme theme = InputHandler.readEnum(Theme.class, "Enter new theme: ");
@@ -47,13 +56,20 @@ public class RoomManager {
         try {
             dao.update(room);
             NotificationService.getInstance()
-                    .notifyObservers("Updated Room: " + room.getId());
+                    .notifyObservers("Updated Room with theme: " + theme +" and difficulty: "+level);
         } catch (Exception e) {
             System.out.println("Error updating Room: " + e.getMessage());
         }
     }
 
     public void deleteRoom() {
+        List<Room> rooms = dao.findAll();
+        if (rooms.isEmpty()) {
+            System.out.println("There are no Rooms available to delete.");
+            return;
+        }
+        System.out.println("Available Rooms:");
+        rooms.forEach(r -> System.out.println("  " + r.getId() + " → " + r.getTheme()+" → " + r.getDifficultLevel()));
         int id = InputHandler.readInt("Enter Room ID to delete: ");
         try {
             dao.delete(id);

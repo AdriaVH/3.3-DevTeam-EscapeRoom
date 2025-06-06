@@ -49,7 +49,7 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
     public void delete(int id) {
         int rowsAffected = executor.executeUpdate("DELETE FROM scaperoom WHERE id = ?", id);
         if (rowsAffected == 0) {
-            throw new RuntimeException(" "+id);
+            throw new RuntimeException(" " + id);
         }
     }
 }

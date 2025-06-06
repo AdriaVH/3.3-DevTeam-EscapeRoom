@@ -16,7 +16,10 @@ public class RoomDAOSQL implements RoomDAO {
     @Override
     public void insert(Room room) {
         String query = "INSERT INTO room (scape_room_id, difficult_level, theme) VALUES (?, ?, ?)";
-        executor.executeUpdate(query, room.getScapeRoomId(), room.getDifficultLevel().name(), room.getTheme().name());
+        executor.executeUpdate(query,
+                room.getScapeRoomId(),
+                room.getDifficultLevel().name(),
+                room.getTheme().name());
     }
 
     @Override

@@ -1,7 +1,5 @@
 package db;
 
-import observer.NotificationService;
-import observer.Subject;
 
 import java.sql.*;
 
@@ -61,9 +59,14 @@ public class SQLExecutor {
         }
     }
 
-    private void setParameters(PreparedStatement statement, Object... params) throws SQLException {
+    private void setParameters(PreparedStatement stmt, Object... params) throws SQLException {
         for (int i = 0; i < params.length; i++) {
-            statement.setObject(i + 1, params[i]);
+            Object p = params[i];
+            if (p == null) {
+                stmt.setNull(i + 1, Types.NULL);
+            } else {
+                stmt.setObject(i + 1, p);
+            }
         }
     }
 

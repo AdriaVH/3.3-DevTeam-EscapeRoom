@@ -36,7 +36,7 @@ public class InputHandler {
 
     public static Integer readOptionalInt(String prompt) {
         System.out.print(prompt);
-        String input = scanner.nextLine();              //Revisar si falta el try-catch
+        String input = scanner.nextLine();
         return input.isBlank() ? null : Integer.parseInt(input);
     }
 

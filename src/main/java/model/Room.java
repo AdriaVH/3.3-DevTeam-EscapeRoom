@@ -5,19 +5,19 @@ import enums.Theme;
 
 public class Room {
     private int id;
-    private int scapeRoomId;
+    private Integer scapeRoomId;
     private DifficultLevel difficultLevel;
     private Theme theme;
 
 
 
-    public Room(int scapeRoomId, DifficultLevel difficultLevel, Theme theme) {
+    public Room(Integer scapeRoomId, DifficultLevel difficultLevel, Theme theme) {
         this.scapeRoomId = scapeRoomId;
         this.difficultLevel = difficultLevel;
         this.theme = theme;
     }
 
-    public Room(int id, int scapeRoomId, DifficultLevel difficultLevel, Theme theme) {
+    public Room(int id, Integer scapeRoomId, DifficultLevel difficultLevel, Theme theme) {
         this.id = id;
         this.scapeRoomId = scapeRoomId;
         this.difficultLevel = difficultLevel;
@@ -32,21 +32,15 @@ public class Room {
         this.id = id;
     }
 
-    public int getScapeRoomId() {
+    public Integer getScapeRoomId() {
         return scapeRoomId;
     }
 
-    public void setScapeRoomId(int scapeRoomId) {
-        this.scapeRoomId = scapeRoomId;
-    }
 
     public DifficultLevel getDifficultLevel() {
         return difficultLevel;
     }
 
-    public void setDifficultLevel(DifficultLevel difficultLevel) {
-        this.difficultLevel = difficultLevel;
-    }
 
     public Theme getTheme() {
         return theme;

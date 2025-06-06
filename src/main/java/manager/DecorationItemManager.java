@@ -1,4 +1,5 @@
 package manager;
+
 import observer.NotificationService;
 
 import enums.Material;
@@ -9,6 +10,8 @@ import repository.dao.DecorationItemDAOSQL;
 import util.InputHandler;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class DecorationItemManager {
     private final DecorationItemDAO dao = new DecorationItemDAOSQL();
@@ -25,7 +28,7 @@ public class DecorationItemManager {
         try {
             dao.insert(item);
             NotificationService.getInstance()
-                    .notifyObservers("Created new DecorationItem: " + item.getId());
+                    .notifyObservers("Created new DecorationItem: " + name);
         } catch (Exception e) {
             System.out.println("Error creating DecorationItem: " + e.getMessage());
         }
@@ -44,6 +47,13 @@ public class DecorationItemManager {
     }
 
     public void updateDecorationItem() {
+        List<DecorationItem> decorations = dao.findAll();
+        if (decorations.isEmpty()) {
+            System.out.println("There are no DecorationItems available to update.");
+            return;
+        }
+        System.out.println("Available DecorationItems:");
+        decorations.forEach(r -> System.out.println("  " + r.getId() + " → " + r.getName()));
         int id = InputHandler.readInt("Enter DecorationItem ID to update: ");
         String name = InputHandler.readString("Enter a new name:");
         Integer roomId = InputHandler.readOptionalInt("Enter a new roomId (or press Enter to skip): ");
@@ -64,11 +74,22 @@ public class DecorationItemManager {
     }
 
     public void deleteDecorationItem() {
+        List<DecorationItem> decorations = dao.findAll();
+        if (decorations.isEmpty()) {
+            System.out.println("There are no DecorationItems available to delete.");
+            return;
+        }
+        System.out.println("Available DecorationItems:");
+        decorations.forEach(r -> System.out.println("  " + r.getId() + " → " + r.getName()));
         int id = InputHandler.readInt("Enter DecorationItem ID to delete: ");
         try {
             dao.delete(id);
+            String name = decorations.stream()
+                    .filter(r -> r.getId() == id)
+                    .map(DecorationItem::getName)
+                    .collect(Collectors.joining());
             NotificationService.getInstance()
-                    .notifyObservers("Deleted DecorationItem: " + id);
+                    .notifyObservers("Deleted DecorationItem: " + name);
         } catch (Exception e) {
             System.out.println("Error deleting DecorationItem: " + e.getMessage());
         }

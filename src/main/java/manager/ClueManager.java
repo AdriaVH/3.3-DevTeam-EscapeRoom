@@ -1,4 +1,5 @@
 package manager;
+
 import observer.NotificationService;
 
 import enums.Theme;
@@ -8,13 +9,15 @@ import repository.dao.ClueDAOSQL;
 import util.InputHandler;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ClueManager {
     private final ClueDAO dao = new ClueDAOSQL();
 
     public void createClue() {
         String name = InputHandler.readString("Enter a name:");
-        Integer enigmaId = InputHandler.readOptionalInt("Enter enigma_id (or press Enter to skip): ");
+        Integer enigmaId = InputHandler.readInt("Enter enigma_id: ");
         Theme theme = InputHandler.readEnum(Theme.class, "Enter theme");
         String description = InputHandler.readString("Enter description");
         BigDecimal price = InputHandler.readBigDecimal("Enter price: ");
@@ -23,7 +26,7 @@ public class ClueManager {
         try {
             dao.insert(obj);
             NotificationService.getInstance()
-                    .notifyObservers("Created new Clue: " + obj.getId());
+                    .notifyObservers("Created new Clue: " + name);
         } catch (Exception e) {
             System.out.println("Error creating Clue: " + e.getMessage());
         }
@@ -41,6 +44,13 @@ public class ClueManager {
     }
 
     public void updateClue() {
+        List<Clue> clues = dao.findAll();
+        if (clues.isEmpty()) {
+            System.out.println("There are no DecorationItems available to update.");
+            return;
+        }
+        System.out.println("Available DecorationItems:");
+        clues.forEach(r -> System.out.println("  " + r.getId() + " → " + r.getName()));
         int id = InputHandler.readInt("Enter Clue ID to update:");
         String name = InputHandler.readString("Enter a new name:");
         Integer enigmaId = InputHandler.readOptionalInt("Enter a new enigma_id (or press Enter to skip): ");
@@ -53,18 +63,29 @@ public class ClueManager {
         try {
             dao.update(obj);
             NotificationService.getInstance()
-                    .notifyObservers("Updated Clue: " + obj.getId());
+                    .notifyObservers("Updated Clue: " + obj.getName());
         } catch (Exception e) {
             System.out.println("Error updating Clue: " + e.getMessage());
         }
     }
 
     public void deleteClue() {
+        List<Clue> clues = dao.findAll();
+        if (clues.isEmpty()) {
+            System.out.println("There are no DecorationItems available to delete.");
+            return;
+        }
+        System.out.println("Available DecorationItems:");
+        clues.forEach(r -> System.out.println("  " + r.getId() + " → " + r.getName()));
         int id = InputHandler.readInt("Enter Clue ID to delete: ");
         try {
             dao.delete(id);
+            String name = clues.stream()
+                    .filter(r -> r.getId() == id)
+                    .map(Clue::getName)
+                    .collect(Collectors.joining());
             NotificationService.getInstance()
-                    .notifyObservers("Deleted Clue: " + id);
+                    .notifyObservers("Deleted Clue: " + name);
         } catch (Exception e) {
             System.out.println("Error deleting Clue: " + e.getMessage());
         }

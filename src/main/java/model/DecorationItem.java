@@ -6,14 +6,14 @@ import enums.Theme;
 import java.math.BigDecimal;
 
 public class DecorationItem extends Item {
-    private int roomId;
+    private Integer roomId;
     private Material material;
     private Theme theme;
     private BigDecimal price;
 
 
 
-    public DecorationItem( int roomId,String name, Material material, Theme theme, String description, BigDecimal price) {
+    public DecorationItem(Integer roomId,String name, Material material, Theme theme, String description, BigDecimal price) {
         super(name, description);
         this.roomId = roomId;
         this.material = material;
@@ -21,7 +21,7 @@ public class DecorationItem extends Item {
         this.price = price;
     }
 
-    public DecorationItem( int id, int roomId, String name, Material material, Theme theme, String description, BigDecimal price) {
+    public DecorationItem( int id,Integer roomId, String name, Material material, Theme theme, String description, BigDecimal price) {
         super(id, name, description);
         this.roomId = roomId;
         this.material = material;
@@ -29,7 +29,7 @@ public class DecorationItem extends Item {
         this.price = price;
     }
 
-    public int getRoomId() {
+    public Integer getRoomId() {
         return roomId;
     }
 
