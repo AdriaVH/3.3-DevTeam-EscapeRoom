@@ -23,7 +23,7 @@ public class InputHandler {
         }
     }
 
-    public static double readDouble(String prompt) {
+    /*public static double readDouble(String prompt) {
         while (true) {
             try {
                 System.out.print(prompt);
@@ -32,13 +32,14 @@ public class InputHandler {
                 System.out.println("❌ Invalid decimal. Try again.");
             }
         }
-    }
+    }*/
 
     public static Integer readOptionalInt(String prompt) {
         System.out.print(prompt);
-        String input = scanner.nextLine();
+        String input = scanner.nextLine();              //Revisar si falta el try-catch
         return input.isBlank() ? null : Integer.parseInt(input);
     }
+
     public static BigDecimal readBigDecimal(String prompt) {
         System.out.print(prompt);
         try {
