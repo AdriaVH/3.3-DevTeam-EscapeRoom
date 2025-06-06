@@ -20,7 +20,7 @@ public class EnigmaManager {
 
         Enigma enigma = new Enigma(roomID, name, description,theme);
         try {
-            dao.update(enigma);
+            dao.insert(enigma);
             NotificationService.getInstance()
                     .notifyObservers("Created new Enigma: " + enigma.getId());
         } catch (Exception e) {
