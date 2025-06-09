@@ -65,8 +65,8 @@ public class DecorationItemManager {
         String name = InputHandler.readString("Enter a new name:");
         Integer roomId = readValidOrSkipRoomId("Enter a new roomId (or press Enter to skip): ");
         DecorationItem.Material material = InputHandler.readEnum(DecorationItem.Material.class, "Enter a new material");
-        Theme theme = InputHandler.readEnum(Theme.class, "Enter a new theme");
-        String description = InputHandler.readString("Enter a new description");
+        Theme theme = InputHandler.readEnum(Theme.class, "Enter a new theme: ");
+        String description = InputHandler.readString("Enter a new description: ");
         BigDecimal price = InputHandler.readBigDecimal("Enter a new price: ");
 
         DecorationItem item = new DecorationItem(roomId,name,material,theme,description,price);
