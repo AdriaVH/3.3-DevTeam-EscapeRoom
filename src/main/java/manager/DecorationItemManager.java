@@ -34,15 +34,20 @@ public class DecorationItemManager {
     }
 
     public void listDecorationItems() {
-        dao.findAll().forEach(i ->
-                System.out.println("ID: " + i.getId() +
-                        " | name: " + i.getName() +
-                        " | room_id: " + i.getRoomId() +
-                        " | material: " + i.getMaterial() +
-                        " | theme: " + i.getTheme() +
-                        " | description: " + i.getDescription() +
-                        " | price: " + i.getPrice())
-        );
+        System.out.printf("%-4s %-20s %-10s %-12s %-20s %-7s %-60s%n",
+                "ID", "Name", "Room ID", "Material", "Theme", "Price", "Description");
+        System.out.println("─".repeat(140)); // nice separator
+
+        dao.findAll().forEach(i -> {
+            String description = i.getDescription();
+            if (description.length() > 57) {
+                description = description.substring(0, 54) + "...";
+            }
+
+            System.out.printf("%-4d %-20s %-10d %-12s %-20s $%-6.2f %-60s%n",
+                    i.getId(), i.getName(), i.getRoomId(), i.getMaterial(),
+                    i.getTheme(), i.getPrice(), description);
+        });
     }
 
     public void updateDecorationItem() {

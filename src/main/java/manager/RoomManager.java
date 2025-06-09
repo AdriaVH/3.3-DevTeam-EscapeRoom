@@ -29,11 +29,16 @@ public class RoomManager {
     }
 
     public void listRooms() {
+        System.out.printf("%-4s %-14s %-10s %-20s%n",
+                "ID", "ScapeRoom ID", "Level", "Theme");
+        System.out.println("─".repeat(60)); // separator line
+
         dao.findAll().forEach(r ->
-                System.out.println("ID: " + r.getId() +
-                        " | ScapeRoom ID: " + r.getScapeRoomId() +
-                        " | Level: " + r.getDifficultLevel() +
-                        " | Theme: " + r.getTheme())
+                System.out.printf("%-4d %-14s %-10s %-20s%n",
+                        r.getId(),
+                        r.getScapeRoomId() != null ? r.getScapeRoomId().toString() : "N/A",
+                        r.getDifficultLevel(),
+                        r.getTheme())
         );
     }
 

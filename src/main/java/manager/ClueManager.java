@@ -33,15 +33,22 @@ public class ClueManager {
     }
 
     public void listClues() {
-        dao.findAll().forEach(o ->
-                System.out.println("ID: " + o.getId() +
-                        " | name: " + o.getName() +
-                        " | enigma_id: " + o.getEnigmaId() +
-                        " | theme: " + o.getTheme() +
-                        " | description: " +o.getDescription()+
-                        " | price: " + o.getPrice())
-        );
+        System.out.printf("%-4s %-25s %-10s %-20s %-7s %-60s%n",
+                "ID", "Name", "Enigma ID", "Theme", "Price", "Description");
+        System.out.println("─".repeat(130)); // separator line
+
+        dao.findAll().forEach(o -> {
+            String description = o.getDescription();
+            if (description.length() > 57) {
+                description = description.substring(0, 54) + "...";
+            }
+
+            System.out.printf("%-4d %-25s %-10d %-20s $%-6.2f %-60s%n",
+                    o.getId(), o.getName(), o.getEnigmaId(),
+                    o.getTheme(), o.getPrice(), description);
+        });
     }
+
 
     public void updateClue() {
         List<Clue> clues = dao.findAll();

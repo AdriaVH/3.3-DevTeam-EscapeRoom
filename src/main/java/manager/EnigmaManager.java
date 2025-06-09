@@ -32,14 +32,25 @@ public class EnigmaManager {
     }
 
     public void listEnigmas() {
-        dao.findAll().forEach(e ->
-                System.out.println("ID: " + e.getId() +
-                        " | name: " + e.getName() +
-                        " | room id: " + e.getRoomId() +
-                        " | theme: " + e.getTheme() +
-                        " | description: " + e.getDescription()
-        ));
+        System.out.printf("%-4s %-25s %-10s %-20s %-60s%n",
+                "ID", "Name", "Room ID", "Theme", "Description");
+        System.out.println("─".repeat(120)); // separator line
+
+        dao.findAll().forEach(e -> {
+            String description = e.getDescription();
+            if (description.length() > 57) {
+                description = description.substring(0, 54) + "...";
+            }
+
+            System.out.printf("%-4d %-25s %-10d %-20s %-60s%n",
+                    e.getId(),
+                    e.getName(),
+                    e.getRoomId(),
+                    e.getTheme(),
+                    description);
+        });
     }
+
 
     public void updateEnigma() {
         List<Enigma> enigmas = dao.findAll();

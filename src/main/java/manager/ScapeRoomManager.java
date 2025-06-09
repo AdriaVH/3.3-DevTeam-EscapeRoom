@@ -25,10 +25,16 @@ public class ScapeRoomManager {
     }
 
     public void listScapeRooms() {
+        System.out.printf("%-4s %-30s%n", "ID", "Name");
+        System.out.println("─".repeat(35)); // separator line
+
         dao.findAll().forEach(s ->
-                System.out.println("ID: " + s.getId() + " | Name: " + s.getName())
+                System.out.printf("%-4d %-30s%n",
+                        s.getId(),
+                        s.getName())
         );
     }
+
 
     public void updateScapeRoom() {
         List<ScapeRoom> rooms = dao.findAll();
