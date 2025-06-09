@@ -8,4 +8,5 @@ public interface EnigmaDAO {
     List<Enigma> findAll();
     void update(Enigma obj);
     void delete(int id);
+    Enigma findById(int id);
 }

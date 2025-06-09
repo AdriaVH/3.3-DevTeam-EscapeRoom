@@ -8,4 +8,6 @@ public interface ScapeRoomDAO {
     List<ScapeRoom> findAll();
     void update(ScapeRoom obj);
     void delete(int id);
+    ScapeRoom findById(int id);
+
 }

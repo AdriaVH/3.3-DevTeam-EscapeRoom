@@ -20,6 +20,26 @@ public class RoomDAOSQL implements RoomDAO {
                 room.getDifficultLevel().name(),
                 room.getTheme().name());
     }
+@Override
+    public Room findById(int id) {
+        ResultSet rs = executor.executeQuery("SELECT * FROM room WHERE id = ?", id);
+
+        try {
+            if (rs != null && rs.next()) {
+                return new Room(
+                        rs.getInt("id"),
+                        rs.getInt("scape_room_id"), // adjust if your DB column is different
+                        Room.DifficultLevel.valueOf(rs.getString("difficult_level")),
+                        Theme.valueOf(rs.getString("theme"))
+                );
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ Error finding Room by ID: " + e.getMessage());
+        }
+
+        return null; // Not found
+    }
+
 
     @Override
     public List<Room> findAll() {

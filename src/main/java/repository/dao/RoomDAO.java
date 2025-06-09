@@ -8,4 +8,5 @@ public interface RoomDAO {
     List<Room> findAll();
     void update(Room obj);
     void delete(int id);
+    Room findById(int id);
 }

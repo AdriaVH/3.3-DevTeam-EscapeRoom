@@ -9,12 +9,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScapeRoomDAOSQL implements ScapeRoomDAO {
-    private final SQLExecutor executor = SQLExecutor.getInstance();
+    private static final SQLExecutor executor = SQLExecutor.getInstance();
 
     @Override
     public void insert(ScapeRoom obj) {
         executor.executeUpdate("INSERT INTO scaperoom (name) VALUES (?)", obj.getName());
     }
+    @Override
+    public ScapeRoom findById(int id) {
+        ResultSet rs = executor.executeQuery("SELECT * FROM scaperoom WHERE id = ?", id);
+
+        try {
+            if (rs != null && rs.next()) {
+                return new ScapeRoom(
+                        rs.getInt("id"),
+                        rs.getString("name")
+                );
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ Error finding ScapeRoom by ID: " + e.getMessage());
+        }
+
+        return null; // Not found
+    }
+
 
     @Override
     public List<ScapeRoom> findAll() {

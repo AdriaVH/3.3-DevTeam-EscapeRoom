@@ -51,6 +51,25 @@ public class EnigmaDAOSQL implements EnigmaDAO {
     }
 
     @Override
+    public Enigma findById(int id) {
+        ResultSet rs = executor.executeQuery("SELECT * FROM enigma WHERE id = ?", id);
+        try {
+            if (rs != null && rs.next()) {
+                return new Enigma(
+                        rs.getInt("id"),
+                        rs.getInt("room_id"),
+                        rs.getString("name"),
+                        Theme.valueOf(rs.getString("theme")),
+                        rs.getString("description"));
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ Error finding Enigma by ID: " + e.getMessage());
+        }
+        return null;
+    }
+
+
+    @Override
     public void update(Enigma obj) {
         executor.executeUpdate(
                 "UPDATE enigma SET room_id = ?, name = ?, theme = ?, description = ? WHERE id = ?",

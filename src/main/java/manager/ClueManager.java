@@ -6,6 +6,8 @@ import enums.Theme;
 import model.Clue;
 import repository.dao.ClueDAO;
 import repository.dao.ClueDAOSQL;
+import repository.dao.EnigmaDAO;
+import repository.dao.EnigmaDAOSQL;
 import util.InputHandler;
 
 import java.math.BigDecimal;
@@ -14,10 +16,11 @@ import java.util.stream.Collectors;
 
 public class ClueManager {
     private final ClueDAO dao = new ClueDAOSQL();
+    private final EnigmaDAO enigmaDao= new EnigmaDAOSQL();
 
     public void createClue() {
         String name = InputHandler.readString("Enter a name:");
-        Integer enigmaId = InputHandler.readInt("Enter enigma_id: ");
+        Integer enigmaId = readValidEnigmaId("Enter Enigma ID: ");
         Theme theme = InputHandler.readEnum(Theme.class, "Enter theme");
         String description = InputHandler.readString("Enter description");
         BigDecimal price = InputHandler.readBigDecimal("Enter price: ");
@@ -60,7 +63,7 @@ public class ClueManager {
         clues.forEach(r -> System.out.println("  " + r.getId() + " → " + r.getName()));
         int id = InputHandler.readInt("Enter Clue ID to update:");
         String name = InputHandler.readString("Enter a new name:");
-        Integer enigmaId = InputHandler.readOptionalInt("Enter a new enigma_id (or press Enter to skip): ");
+        Integer enigmaId = readValidEnigmaId("Enter Enigma ID to update: ");
         Theme theme = InputHandler.readEnum(Theme.class, "Enter a new theme");
         BigDecimal price = InputHandler.readBigDecimal("Enter a new price: ");
         String description = InputHandler.readString("Enter a new description");
@@ -97,4 +100,14 @@ public class ClueManager {
             System.out.println("Error deleting Clue: " + e.getMessage());
         }
     }
+    private int readValidEnigmaId(String message) {
+        while (true) {
+            int id = InputHandler.readInt(message);
+            if (enigmaDao.findById(id) != null) {
+                return id;
+            }
+            System.out.println("❌ No Enigma exists with ID: " + id + ". Please try again.");
+        }
+    }
+
 }
