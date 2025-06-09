@@ -50,7 +50,6 @@ public class DecorationItemDAOSQL implements DecorationItemDAO {
         } catch (SQLException e) {
             System.err.println("❌ Error reading decoration items: " + e.getMessage());
         }
-
         return items;
     }
 

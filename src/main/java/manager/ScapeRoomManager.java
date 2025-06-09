@@ -57,17 +57,6 @@ public class ScapeRoomManager {
         }
     }
 
-    /*public void deleteScapeRoom() {
-        int id = InputHandler.readInt("Enter ScapeRoom ID to delete: ");
-        try {
-            dao.delete(id);
-            NotificationService.getInstance()
-                    .notifyObservers("Deleted EscapeRoom: " + id);
-        } catch (Exception e) {
-            System.out.println("Error deleting EscapeRoom with id = : " + e.getMessage());
-        }
-    }*/
-
     public void deleteScapeRoom() {
         List<ScapeRoom> rooms = dao.findAll();
         if (rooms.isEmpty()) {
@@ -93,5 +82,4 @@ public class ScapeRoomManager {
             System.out.println("Error deleting EscapeRoom with id = " + e.getMessage());
         }
     }
-
 }

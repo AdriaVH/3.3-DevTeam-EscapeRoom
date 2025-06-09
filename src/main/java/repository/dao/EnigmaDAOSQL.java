@@ -68,7 +68,6 @@ public class EnigmaDAOSQL implements EnigmaDAO {
         return null;
     }
 
-
     @Override
     public void update(Enigma obj) {
         executor.executeUpdate(

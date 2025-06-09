@@ -36,7 +36,6 @@ public class DecorationItemManager {
         }
     }
 
-
     public void listDecorationItems() {
         System.out.printf("%-4s %-20s %-10s %-12s %-20s %-7s %-60s%n",
                 "ID", "Name", "Room ID", "Material", "Theme", "Price", "Description");

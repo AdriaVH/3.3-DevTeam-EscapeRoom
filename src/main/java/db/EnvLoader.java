@@ -19,7 +19,6 @@ public class EnvLoader {
         }
     }
 
-    // Método público para acceder a la instancia única
     public static EnvLoader getInstance() {
         if (instance == null) {
             instance = new EnvLoader();
@@ -27,7 +26,6 @@ public class EnvLoader {
         return instance;
     }
 
-    // Método para obtener una variable de entorno
     public String get(String key) {
         String value = props.getProperty(key);
         if (value == null) {

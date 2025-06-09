@@ -11,7 +11,6 @@ public class DecorationItem extends Item {
     private BigDecimal price;
 
 
-
     public DecorationItem(Integer roomId,String name, Material material, Theme theme, String description, BigDecimal price) {
         super(name, description);
         this.roomId = roomId;

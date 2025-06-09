@@ -52,7 +52,6 @@ public class ClueManager {
         });
     }
 
-
     public void updateClue() {
         List<Clue> clues = dao.findAll();
         if (clues.isEmpty()) {
@@ -100,6 +99,7 @@ public class ClueManager {
             System.out.println("Error deleting Clue: " + e.getMessage());
         }
     }
+
     private int readValidEnigmaId(String message) {
         while (true) {
             int id = InputHandler.readInt(message);

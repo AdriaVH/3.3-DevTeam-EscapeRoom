@@ -28,18 +28,6 @@ public class InputHandler {
         }
     }
 
-
-    /*public static double readDouble(String prompt) {
-        while (true) {
-            try {
-                System.out.print(prompt);
-                return Double.parseDouble(scanner.nextLine());
-            } catch (NumberFormatException e) {
-                System.out.println("❌ Invalid decimal. Try again.");
-            }
-        }
-    }*/
-
     public static Integer readOptionalInt(String prompt) {
         while (true) {
             System.out.print(prompt);
@@ -60,7 +48,6 @@ public class InputHandler {
         }
     }
 
-
     public static BigDecimal readBigDecimal(String prompt) {
         System.out.print(prompt);
         try {
@@ -75,7 +62,6 @@ public class InputHandler {
             return readBigDecimal(prompt);
         }
     }
-
 
     public static <T extends Enum<T>> T readEnum(Class<T> enumClass, String prompt) {
         System.out.println(prompt + " " + Arrays.toString(enumClass.getEnumConstants()));

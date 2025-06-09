@@ -28,14 +28,11 @@ public class Clue extends Item {
         return enigmaId;
     }
 
-
     public Theme getTheme() {
         return theme;
     }
 
-
     public BigDecimal getPrice() {
         return price;
     }
-
 }

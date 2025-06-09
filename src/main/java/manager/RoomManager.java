@@ -36,7 +36,7 @@ public class RoomManager {
     public void listRooms() {
         System.out.printf("%-4s %-14s %-10s %-20s%n",
                 "ID", "ScapeRoom ID", "Level", "Theme");
-        System.out.println("─".repeat(60)); // separator line
+        System.out.println("─".repeat(60));
 
         dao.findAll().forEach(r ->
                 System.out.printf("%-4d %-14s %-10s %-20s%n",
@@ -92,7 +92,7 @@ public class RoomManager {
         while (true) {
             Integer scapeRoomId = InputHandler.readOptionalInt(prompt);
             if (scapeRoomId == null || scapeRoomDao.findById(scapeRoomId) != null) {
-                return scapeRoomId; // Valid or skipped
+                return scapeRoomId;
             }
             System.out.println("❌ No ScapeRoom exists with ID: " + scapeRoomId + ". Please try again.");
         }

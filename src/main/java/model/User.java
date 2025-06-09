@@ -29,11 +29,11 @@ public class User{
     public void setName(String name) {
         this.name = name;
     }
+
     public void addNotification(String message) {
         notifications.add(message);
     }
 
-    /** Devuelve todas las notificaciones recibidas hasta el momento */
     public List<String> getNotifications() {
         return new ArrayList<>(notifications);
     }

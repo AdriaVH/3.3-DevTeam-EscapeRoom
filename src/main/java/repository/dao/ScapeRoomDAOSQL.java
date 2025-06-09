@@ -30,9 +30,8 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
             System.err.println("❌ Error finding ScapeRoom by ID: " + e.getMessage());
         }
 
-        return null; // Not found
+        return null;
     }
-
 
     @Override
     public List<ScapeRoom> findAll() {

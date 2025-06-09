@@ -37,9 +37,8 @@ public class RoomDAOSQL implements RoomDAO {
             System.err.println("❌ Error finding Room by ID: " + e.getMessage());
         }
 
-        return null; // Not found
+        return null;
     }
-
 
     @Override
     public List<Room> findAll() {

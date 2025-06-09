@@ -35,11 +35,9 @@ public class Room {
         return scapeRoomId;
     }
 
-
     public DifficultLevel getDifficultLevel() {
         return difficultLevel;
     }
-
 
     public Theme getTheme() {
         return theme;
