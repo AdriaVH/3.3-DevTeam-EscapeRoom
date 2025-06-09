@@ -1,7 +1,6 @@
 package repository.dao;
 
 import db.SQLExecutor;
-import enums.Material;
 import enums.Theme;
 import model.DecorationItem;
 
@@ -42,7 +41,7 @@ public class DecorationItemDAOSQL implements DecorationItemDAO {
                 rs.getInt("id"),
                 rs.getInt("room_Id"),
                 rs.getString("name"),
-                Material.valueOf(rs.getString("material")),
+                DecorationItem.Material.valueOf(rs.getString("material")),
                 Theme.valueOf(rs.getString("theme")),
                 rs.getString("description"),
                 rs.getBigDecimal("price"));

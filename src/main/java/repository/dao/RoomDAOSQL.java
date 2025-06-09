@@ -1,7 +1,6 @@
 package repository.dao;
 
 import db.SQLExecutor;
-import enums.DifficultLevel;
 import enums.Theme;
 import model.Room;
 
@@ -37,7 +36,7 @@ public class RoomDAOSQL implements RoomDAO {
                 Room room = new Room(
                         rs.getInt("id"),
                         rs.getInt("scape_room_id"),
-                        DifficultLevel.valueOf(rs.getString("difficult_level")),
+                        Room.DifficultLevel.valueOf(rs.getString("difficult_level")),
                         Theme.valueOf(rs.getString("theme")));
                 rooms.add(room);
             }

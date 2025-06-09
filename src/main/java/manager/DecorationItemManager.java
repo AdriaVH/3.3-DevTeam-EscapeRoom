@@ -2,7 +2,6 @@ package manager;
 
 import observer.NotificationService;
 
-import enums.Material;
 import enums.Theme;
 import model.DecorationItem;
 import repository.dao.DecorationItemDAO;
@@ -19,7 +18,7 @@ public class DecorationItemManager {
     public void createDecorationItem() {
         String name = InputHandler.readString("Enter a name:");
         Integer roomId = InputHandler.readOptionalInt("Enter roomId (or press Enter to skip): ");
-        Material material = InputHandler.readEnum(Material.class, "Enter material");
+        DecorationItem.Material material = InputHandler.readEnum(DecorationItem.Material.class, "Enter material");
         Theme theme = InputHandler.readEnum(Theme.class, "Enter theme");
         String description = InputHandler.readString("Enter description");
         BigDecimal price = InputHandler.readBigDecimal("Enter price: ");
@@ -57,7 +56,7 @@ public class DecorationItemManager {
         int id = InputHandler.readInt("Enter DecorationItem ID to update: ");
         String name = InputHandler.readString("Enter a new name:");
         Integer roomId = InputHandler.readOptionalInt("Enter a new roomId (or press Enter to skip): ");
-        Material material = InputHandler.readEnum(Material.class, "Enter a new material");
+        DecorationItem.Material material = InputHandler.readEnum(DecorationItem.Material.class, "Enter a new material");
         Theme theme = InputHandler.readEnum(Theme.class, "Enter a new theme");
         String description = InputHandler.readString("Enter a new description");
         BigDecimal price = InputHandler.readBigDecimal("Enter a new price: ");

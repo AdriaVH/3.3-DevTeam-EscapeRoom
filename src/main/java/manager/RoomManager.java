@@ -3,7 +3,6 @@ package manager;
 import observer.NotificationService;
 
 import model.Room;
-import enums.DifficultLevel;
 import enums.Theme;
 import repository.dao.RoomDAO;
 import repository.dao.RoomDAOSQL;
@@ -16,7 +15,7 @@ public class RoomManager {
 
     public void createRoom() {
         int scapeRoomId = InputHandler.readInt("Enter ScapeRoom ID: ");
-        DifficultLevel level = InputHandler.readEnum(DifficultLevel.class, "Enter difficulty level: ");
+        Room.DifficultLevel level = InputHandler.readEnum(Room.DifficultLevel.class, "Enter difficulty level: ");
         Theme theme = InputHandler.readEnum(Theme.class, "Enter theme: ");
 
         Room room = new Room(scapeRoomId, level, theme);
@@ -48,7 +47,7 @@ public class RoomManager {
         rooms.forEach(r -> System.out.println("  " + r.getId() + " → " + r.getTheme()+" → " + r.getDifficultLevel()));
         int id = InputHandler.readOptionalInt("Enter Room ID to update (or press Enter to skip): ");
         int scapeRoomId = InputHandler.readInt("Enter new ScapeRoom ID: ");
-        DifficultLevel level = InputHandler.readEnum(DifficultLevel.class, "Enter new difficulty level: ");
+        Room.DifficultLevel level = InputHandler.readEnum(Room.DifficultLevel.class, "Enter new difficulty level: ");
         Theme theme = InputHandler.readEnum(Theme.class, "Enter new theme: ");
 
         Room room = new Room(scapeRoomId, level, theme);

@@ -1,6 +1,5 @@
 package model;
 
-import enums.DifficultLevel;
 import enums.Theme;
 
 public class Room {
@@ -48,5 +47,9 @@ public class Room {
 
     public void setTheme(Theme theme) {
         this.theme = theme;
+    }
+
+    public enum DifficultLevel {
+        EASY, MEDIUM, HARD
     }
 }

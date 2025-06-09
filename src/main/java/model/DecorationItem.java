@@ -1,6 +1,5 @@
 package model;
 
-import enums.Material;
 import enums.Theme;
 
 import java.math.BigDecimal;
@@ -55,5 +54,9 @@ public class DecorationItem extends Item {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public enum Material {
+        WOOD, METAL, PLASTIC, PAPER, CRYSTAL
     }
 }
