@@ -6,6 +6,7 @@ public class MainMenu {
     private final ScapeRoomMenu scapeRoomMenu = new ScapeRoomMenu();
     private final RoomMenu roomMenu = new RoomMenu();
     private final ItemMenu itemMenu = new ItemMenu();
+    private final UserAndSalesMenu userMenu = new UserAndSalesMenu();
 
     public void start() {
         int option;
@@ -14,6 +15,8 @@ public class MainMenu {
             System.out.println("1. Manage ScapeRooms");
             System.out.println("2. Manage Rooms");
             System.out.println("3. Manage Items");
+            System.out.println("4. Manage Users");
+
             System.out.println("0. Exit");
             option = InputHandler.readInt("Choose an option: ");
 
@@ -21,6 +24,7 @@ public class MainMenu {
                 case 1 -> scapeRoomMenu.show();
                 case 2 -> roomMenu.show();
                 case 3 -> itemMenu.show();
+                case 4 -> userMenu.show();
                 case 0 -> System.out.println("👋 Exiting...");
                 default -> System.out.println("❌ Invalid option.");
             }
