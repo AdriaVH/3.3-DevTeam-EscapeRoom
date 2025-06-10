@@ -15,7 +15,7 @@ public class DecorationItemManager {
 
     public void createDecorationItem() {
         String name = InputHandler.readString("Enter a name: ");
-        Integer roomId = readValidOrSkipRoomId("Enter Room ID (or press Enter to skip): ");
+        Integer roomId = InputHandler.readValidOrSkipId(roomDao::findById,"Enter Room new ID (press '0' to leave it WITHOUT Room assigned): ");
         DecorationItem.Material material = InputHandler.readEnum(DecorationItem.Material.class, "Enter material: ");
         Theme theme = InputHandler.readEnum(Theme.class, "Enter theme: ");
         String description = InputHandler.readString("Enter description: ");
@@ -52,13 +52,13 @@ public class DecorationItemManager {
     public void updateDecorationItem() {
         listDecorationItems();
 
-        int id = readValidDecorationItemId("Enter DecorationItem ID to update: ");
-        String name = InputHandler.readString("Enter a new name:");
-        Integer roomId = readValidOrSkipRoomId("Enter a new roomId (or press Enter to skip): ");
-        DecorationItem.Material material = InputHandler.readEnum(DecorationItem.Material.class, "Enter a new material");
-        Theme theme = InputHandler.readEnum(Theme.class, "Enter a new theme: ");
-        String description = InputHandler.readString("Enter a new description: ");
-        BigDecimal price = InputHandler.readBigDecimal("Enter a new price: ");
+        int id = InputHandler.readValidId(dao::findById,"Enter DecorationItem ID to update: ");
+        String name = InputHandler.readOptionalString("Enter a new name (or press Enter to skip): ");
+        Integer roomId = InputHandler.readValidOrSkipId(roomDao::findById,"Enter Room with new ID (press 'Enter' to skip OR '0' to leave it WITHOUT Room assigned): ");
+        DecorationItem.Material material = InputHandler.readOptionalEnum(DecorationItem.Material.class, "Enter a new material (or press Enter to skip) : ");
+        Theme theme = InputHandler.readOptionalEnum(Theme.class, "Enter a new theme (or press Enter to skip): ");
+        String description = InputHandler.readOptionalString("Enter a new description (or press Enter to skip): ");
+        BigDecimal price = InputHandler.readOptionalBigDecimal("Enter a new price (or press Enter to skip): ");
 
         DecorationItem item = new DecorationItem(id, roomId, name, material, theme, description, price);
         try {
@@ -73,7 +73,7 @@ public class DecorationItemManager {
     public void deleteDecorationItem() {
         listDecorationItems();
 
-        int id = readValidDecorationItemId("Enter DecorationItem ID to delete: ");
+        Integer id = InputHandler.readValidId(dao::findById,"Enter DecorationItem ID to delete: ");
         try {
             DecorationItem decoItem = dao.findById(id);
             String name = decoItem.getName();
@@ -85,23 +85,4 @@ public class DecorationItemManager {
         }
     }
 
-    private Integer readValidOrSkipRoomId(String message) {
-        while (true) {
-            Integer roomId = InputHandler.readOptionalInt(message);
-            if (roomId == null || roomDao.findById(roomId) != null) {
-                return roomId; // Valid or skipped
-            }
-            System.out.println("❌ No Room exists with ID: " + roomId + ". Please try again.");
-        }
-    }
-
-    private int readValidDecorationItemId(String message) {
-        while (true) {
-            int id = InputHandler.readInt(message);
-            if (dao.findById(id) != null) {
-                return id;
-            }
-            System.out.println("❌ No DecorationItem exists with ID: " + id + ". Please try again.");
-        }
-    }
 }

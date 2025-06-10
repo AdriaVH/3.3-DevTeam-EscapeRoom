@@ -14,7 +14,7 @@ public class EnigmaManager {
 
     public void createEnigma() {
         String name = InputHandler.readString("Enter name: ");
-        Integer roomId = readValidOrSkipRoomId("Enter Room ID (or press Enter to skip): ");
+        Integer roomId = InputHandler.readValidOrSkipId(roomDao::findById,"Enter Room ID (press '0' to leave it WITHOUT Room assigned): ");
         Theme theme = InputHandler.readEnum(Theme.class, "Enter theme");
         String description = InputHandler.readString("Enter a description:");
 
@@ -52,11 +52,11 @@ public class EnigmaManager {
     public void updateEnigma() {
         listEnigmas();
 
-        int id = readValidEnigmaId("Enter id: ");
-        String name = InputHandler.readString("Enter new name");
-        int roomID = readValidOrSkipRoomId("Enter new room ID (or press Enter to skip)");
-        Theme theme = InputHandler.readEnum(Theme.class, "Enter new theme");
-        String description = InputHandler.readString("Enter a new description:");
+        int id = InputHandler.readValidId(dao::findById,"Enter id: ");
+        String name = InputHandler.readOptionalString("Enter new name (or press Enter to skip): ");
+        int roomID = InputHandler.readValidOrSkipId(roomDao::findById,"Enter new room ID (press 'Enter' to skip OR '0' to leave it WITHOUT Room assigned)");
+        Theme theme = InputHandler.readOptionalEnum(Theme.class, "Enter new theme (or press Enter to skip): ");
+        String description = InputHandler.readOptionalString("Enter a new description (or press Enter to skip): ");
 
         Enigma enigma = new Enigma(id, roomID, name, theme, description);
         try {
@@ -71,7 +71,7 @@ public class EnigmaManager {
     public void deleteEnigma() {
         listEnigmas();
 
-        int id = readValidEnigmaId("Enter Enigma ID to delete: ");
+        int id = InputHandler.readValidId(dao::findById,"Enter Enigma ID to delete: ");
         try {
             Enigma enigma = dao.findById(id);
             String name = enigma.getName();
@@ -80,24 +80,6 @@ public class EnigmaManager {
                     .notifyObservers("Deleted Enigma: " + name);
         } catch (Exception e) {
             System.out.println("Error deleting Enigma: " + e.getMessage());
-        }
-    }
-    private Integer readValidOrSkipRoomId(String message) {
-        while (true) {
-            Integer roomId = InputHandler.readOptionalInt(message);
-            if (roomId == null || roomDao.findById(roomId) != null) {
-                return roomId; // Valid or skipped
-            }
-            System.out.println("❌ No Room exists with ID: " + roomId + ". Please try again.");
-        }
-    }
-    private int readValidEnigmaId(String message) {
-        while (true) {
-            int id = InputHandler.readInt(message);
-            if (dao.findById(id) != null) {
-                return id;
-            }
-            System.out.println("❌ No Enigma exists with ID: " + id + ". Please try again.");
         }
     }
 }

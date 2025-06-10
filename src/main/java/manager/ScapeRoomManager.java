@@ -35,10 +35,10 @@ public class ScapeRoomManager {
     public void updateScapeRoom() {
         listScapeRooms();
 
-        int id = readValidScaperoomId("Enter ScapeRoom ID to update: ");
-        String name = InputHandler.readString("Enter new name: ");
-        ScapeRoom obj = new ScapeRoom(name);
-        obj.setId(id);
+        int id = InputHandler.readValidId(dao::findById,"Enter ScapeRoom ID to update: ");
+        String name = InputHandler.readOptionalString("Enter new name (or press Enter to skip): ");
+        ScapeRoom obj = new ScapeRoom(id,name);
+
         try {
             dao.update(obj);
             NotificationService.getInstance()
@@ -51,7 +51,7 @@ public class ScapeRoomManager {
     public void deleteScapeRoom() {
         listScapeRooms();
 
-        int id = readValidScaperoomId("Enter ScapeRoom ID to delete: ");
+        int id = InputHandler.readValidId(dao::findById,"Enter ScapeRoom ID to delete: ");
         try {
             ScapeRoom scapeRoom = dao.findById(id);
             String name = scapeRoom.getName();
@@ -60,16 +60,6 @@ public class ScapeRoomManager {
         } catch (
                 RuntimeException e) {
             System.out.println("Error deleting EscapeRoom with id = " + e.getMessage());
-        }
-    }
-
-    private int readValidScaperoomId(String message) {
-        while (true) {
-            int id = InputHandler.readInt(message);
-            if (dao.findById(id) != null) {
-                return id;
-            }
-            System.out.println("❌ No Scaperoom exists with ID: " + id + ". Please try again.");
         }
     }
 }

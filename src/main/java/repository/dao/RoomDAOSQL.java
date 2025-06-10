@@ -68,9 +68,20 @@ public class RoomDAOSQL implements RoomDAO {
 
     @Override
     public void update(Room room) {
-        String query = "UPDATE room SET scape_room_id = ?, difficult_level = ?, theme = ? WHERE id = ?";
-        executor.executeUpdate(query, room.getScapeRoomId(), room.getDifficultLevel().name(), room.getTheme().name(), room.getId());
+        String query = "UPDATE room SET scape_room_id = CASE WHEN ? = 0 THEN NULL ELSE COALESCE(?, scape_room_id) END, " +
+                "difficult_level = COALESCE(?, difficult_level), " +
+                "theme = COALESCE(?, theme) " +
+                "WHERE id = ?";
+
+        executor.executeUpdate(query,
+                room.getScapeRoomId(),
+                room.getScapeRoomId(),
+                room.getDifficultLevel(),
+                room.getTheme(),
+                room.getId());
     }
+
+
 
     @Override
     public void delete(int id) {

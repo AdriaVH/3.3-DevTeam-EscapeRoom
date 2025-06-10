@@ -55,17 +55,25 @@ public class DecorationItemDAOSQL implements DecorationItemDAO {
 
     @Override
     public void update(DecorationItem obj) {
-        executor.executeUpdate(
-                "UPDATE decorationitem SET name = ?, room_id = ?, material = ?, theme = ?, description = ?, price = ? WHERE id = ?",
+        String query = "UPDATE decorationitem SET room_id = CASE WHEN ? = 0 THEN NULL ELSE COALESCE(?, room_id) END, " +
+                "name = COALESCE(?, name), " +
+                "material = COALESCE(?, material), " +
+                "theme = COALESCE(?, theme), " +
+                "description = COALESCE(?, description), " +
+                "price = COALESCE(?, price) " +
+                "WHERE id = ?";
+
+        executor.executeUpdate(query,
+                obj.getRoomId(), obj.getRoomId(),
                 obj.getName(),
-                obj.getRoomId(),
-                obj.getMaterial().name(),
-                obj.getTheme().name(),
+                obj.getMaterial(),
+                obj.getTheme(),
                 obj.getDescription(),
                 obj.getPrice(),
-                obj.getId()
-        );
+                obj.getId());
     }
+
+
 
     @Override
     public void delete(int id) {

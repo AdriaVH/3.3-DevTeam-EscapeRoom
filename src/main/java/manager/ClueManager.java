@@ -16,7 +16,7 @@ public class ClueManager {
 
     public void createClue() {
         String name = InputHandler.readString("Enter a name:");
-        Integer enigmaId = readValidEnigmaId("Enter Enigma ID: ");
+        Integer enigmaId = InputHandler.readValidId(enigmaDao::findById,"Enter Enigma ID: ");
         Theme theme = InputHandler.readEnum(Theme.class, "Enter theme");
         String description = InputHandler.readString("Enter description");
         BigDecimal price = InputHandler.readBigDecimal("Enter price: ");
@@ -51,12 +51,12 @@ public class ClueManager {
     public void updateClue() {
         listClues();
 
-        int id = readValidClueId("Enter Clue ID to update:");
-        String name = InputHandler.readString("Enter a new name:");
-        Integer enigmaId = readValidEnigmaId("Enter Enigma ID to update: ");
-        Theme theme = InputHandler.readEnum(Theme.class, "Enter a new theme");
-        BigDecimal price = InputHandler.readBigDecimal("Enter a new price: ");
-        String description = InputHandler.readString("Enter a new description");
+        int id = InputHandler.readValidId(dao::findById,"Enter Clue ID to update:");
+        String name = InputHandler.readOptionalString("Enter a new name (or press Enter to skip): ");
+        Integer enigmaId = InputHandler.readValidOrSkipId(enigmaDao::findById,"Enter Enigma new ID (or press 'Enter' to skip): ");
+        Theme theme = InputHandler.readOptionalEnum(Theme.class, "Enter a new theme (or press Enter to skip): ");
+        BigDecimal price = InputHandler.readOptionalBigDecimal("Enter a new price (or press Enter to skip): ");
+        String description = InputHandler.readOptionalString("Enter a new description (or press Enter to skip): ");
 
         Clue obj = new Clue(id,enigmaId, name,theme,description,price);
         try {
@@ -71,7 +71,7 @@ public class ClueManager {
     public void deleteClue() {
         listClues();
 
-        int id = readValidClueId("Enter Enigma ID to delete: ");
+        int id = InputHandler.readValidId(dao::findById,"Enter Enigma ID to delete: ");
         try {
             Clue clue = dao.findById(id);
             String name = clue.getName();
@@ -80,25 +80,6 @@ public class ClueManager {
                     .notifyObservers("Deleted Clue: " + name);
         } catch (Exception e) {
             System.out.println("Error deleting Clue: " + e.getMessage());
-        }
-    }
-
-    private int readValidEnigmaId(String message) {
-        while (true) {
-            int id = InputHandler.readInt(message);
-            if (enigmaDao.findById(id) != null) {
-                return id;
-            }
-            System.out.println("❌ No Enigma exists with ID: " + id + ". Please try again.");
-        }
-    }
-    private int readValidClueId(String message) {
-        while (true) {
-            int id = InputHandler.readInt(message);
-            if (dao.findById(id) != null) {
-                return id;
-            }
-            System.out.println("❌ No Clue exists with ID: " + id + ". Please try again.");
         }
     }
 }

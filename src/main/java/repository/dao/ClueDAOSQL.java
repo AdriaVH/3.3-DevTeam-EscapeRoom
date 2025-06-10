@@ -53,17 +53,23 @@ public class ClueDAOSQL implements ClueDAO {
 
     @Override
     public void update(Clue obj) {
-        executor.executeUpdate(
-                "UPDATE clue SET id = ?, enigma_id = ?, name = ?, theme = ?, description = ?, price = ? WHERE id = ?",
-                obj.getId(),
-                obj.getEnigmaId(),
+        String query = "UPDATE clue SET enigma_id = CASE WHEN ? = 0 THEN NULL ELSE COALESCE(?, enigma_id) END, " +
+                "name = COALESCE(?, name), " +
+                "theme = COALESCE(?, theme), " +
+                "description = COALESCE(?, description), " +
+                "price = COALESCE(?, price) " +
+                "WHERE id = ?";
+
+        executor.executeUpdate(query,
+                obj.getEnigmaId(), obj.getEnigmaId(),
                 obj.getName(),
-                obj.getTheme().name(),
+                obj.getTheme(),
                 obj.getDescription(),
                 obj.getPrice(),
-                obj.getId()
-        );
+                obj.getId());
     }
+
+
 
     @Override
     public void delete(int id) {

@@ -70,15 +70,21 @@ public class EnigmaDAOSQL implements EnigmaDAO {
 
     @Override
     public void update(Enigma obj) {
-        executor.executeUpdate(
-                "UPDATE enigma SET room_id = ?, name = ?, theme = ?, description = ? WHERE id = ?",
-                obj.getRoomId(),
+        String query = "UPDATE enigma SET room_id = CASE WHEN ? = 0 THEN NULL ELSE COALESCE(?, room_id) END, " +
+                "name = COALESCE(?, name), " +
+                "theme = COALESCE(?, theme), " +
+                "description = COALESCE(?, description) " +
+                "WHERE id = ?";
+
+        executor.executeUpdate(query,
+                obj.getRoomId(), obj.getRoomId(),
                 obj.getName(),
-                obj.getTheme().name(),
+                obj.getTheme(),
                 obj.getDescription(),
-                obj.getId()
-        );
+                obj.getId());
     }
+
+
 
     @Override
     public void delete(int id) {
