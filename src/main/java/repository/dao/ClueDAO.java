@@ -8,4 +8,5 @@ public interface ClueDAO {
     List<Clue> findAll();
     void update(Clue obj);
     void delete(int id);
+    Clue findById(int id);
 }

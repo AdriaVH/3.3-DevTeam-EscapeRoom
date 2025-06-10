@@ -71,4 +71,26 @@ public class DecorationItemDAOSQL implements DecorationItemDAO {
     public void delete(int id) {
         executor.executeUpdate("DELETE FROM decorationitem WHERE id = ?", id);
     }
+
+    @Override
+    public DecorationItem findById(int id) {
+        ResultSet rs = executor.executeQuery("SELECT * FROM decorationitem WHERE id = ?", id);
+        try {
+            if (rs != null && rs.next()) {
+                return new DecorationItem(
+                        rs.getInt("id"),
+                        rs.getInt("room_id"),
+                        rs.getString("name"),
+                        DecorationItem.Material.valueOf(rs.getString("material")),
+                        Theme.valueOf(rs.getString("theme")),
+                        rs.getString("description"),
+                        rs.getBigDecimal("price")
+                );
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ Error finding DecorationItem by ID: " + e.getMessage());
+        }
+        return null;
+    }
+
 }

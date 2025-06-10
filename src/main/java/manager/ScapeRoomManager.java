@@ -1,13 +1,10 @@
 package manager;
-import observer.NotificationService;
 
+import observer.NotificationService;
 import model.ScapeRoom;
 import repository.dao.ScapeRoomDAO;
 import repository.dao.ScapeRoomDAOSQL;
 import util.InputHandler;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ScapeRoomManager {
     private final ScapeRoomDAO dao = new ScapeRoomDAOSQL();
@@ -35,16 +32,10 @@ public class ScapeRoomManager {
         );
     }
 
-
     public void updateScapeRoom() {
-        List<ScapeRoom> rooms = dao.findAll();
-        if (rooms.isEmpty()) {
-            System.out.println("There are no ScapeRooms available to delete.");
-            return;
-        }
-        System.out.println("Available ScapeRooms:");
-        rooms.forEach(r -> System.out.println("  " + r.getId() + " → " + r.getName()));
-        int id = InputHandler.readInt("Enter ScapeRoom ID to update: ");
+        listScapeRooms();
+
+        int id = readValidScaperoomId("Enter ScapeRoom ID to update: ");
         String name = InputHandler.readString("Enter new name: ");
         ScapeRoom obj = new ScapeRoom(name);
         obj.setId(id);
@@ -58,28 +49,27 @@ public class ScapeRoomManager {
     }
 
     public void deleteScapeRoom() {
-        List<ScapeRoom> rooms = dao.findAll();
-        if (rooms.isEmpty()) {
-            System.out.println("There are no ScapeRooms available to delete.");
-            return;
-        }
-        System.out.println("Available ScapeRooms:");
-        rooms.forEach(r -> System.out.println("  " + r.getId() + " → " + r.getName()));
-        int id = InputHandler.readInt("Enter ScapeRoom ID to delete: ");
+        listScapeRooms();
+
+        int id = readValidScaperoomId("Enter ScapeRoom ID to delete: ");
         try {
-            boolean exists = rooms.stream().anyMatch(r -> r.getId() == id);
-            if (exists) {
-                dao.delete(id);
-                String name = rooms.stream()
-                        .filter(r -> r.getId() == id)
-                        .map(ScapeRoom::getName)
-                        .collect(Collectors.joining());
-                NotificationService.getInstance().notifyObservers("Deleted EscapeRoom: " + name);
-            } else {
-                System.out.println("No ScapeRoom with ID " + id);
-            }
-        } catch (RuntimeException e) {
+            ScapeRoom scapeRoom = dao.findById(id);
+            String name = scapeRoom.getName();
+            dao.delete(scapeRoom.getId());
+            NotificationService.getInstance().notifyObservers("Deleted EscapeRoom: " + name);
+        } catch (
+                RuntimeException e) {
             System.out.println("Error deleting EscapeRoom with id = " + e.getMessage());
+        }
+    }
+
+    private int readValidScaperoomId(String message) {
+        while (true) {
+            int id = InputHandler.readInt(message);
+            if (dao.findById(id) != null) {
+                return id;
+            }
+            System.out.println("❌ No Scaperoom exists with ID: " + id + ". Please try again.");
         }
     }
 }

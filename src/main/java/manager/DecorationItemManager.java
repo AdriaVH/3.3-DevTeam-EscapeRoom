@@ -1,17 +1,13 @@
 package manager;
 
 import observer.NotificationService;
-
 import enums.Theme;
 import model.DecorationItem;
 import repository.dao.DecorationItemDAO;
 import repository.dao.DecorationItemDAOSQL;
 import repository.dao.RoomDAOSQL;
 import util.InputHandler;
-
 import java.math.BigDecimal;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class DecorationItemManager {
     private final DecorationItemDAO dao = new DecorationItemDAOSQL();
@@ -54,14 +50,9 @@ public class DecorationItemManager {
     }
 
     public void updateDecorationItem() {
-        List<DecorationItem> decorations = dao.findAll();
-        if (decorations.isEmpty()) {
-            System.out.println("There are no DecorationItems available to update.");
-            return;
-        }
-        System.out.println("Available DecorationItems:");
-        decorations.forEach(r -> System.out.println("  " + r.getId() + " → " + r.getName()));
-        int id = InputHandler.readInt("Enter DecorationItem ID to update: ");
+        listDecorationItems();
+
+        int id = readValidDecorationItemId("Enter DecorationItem ID to update: ");
         String name = InputHandler.readString("Enter a new name:");
         Integer roomId = readValidOrSkipRoomId("Enter a new roomId (or press Enter to skip): ");
         DecorationItem.Material material = InputHandler.readEnum(DecorationItem.Material.class, "Enter a new material");
@@ -69,8 +60,7 @@ public class DecorationItemManager {
         String description = InputHandler.readString("Enter a new description: ");
         BigDecimal price = InputHandler.readBigDecimal("Enter a new price: ");
 
-        DecorationItem item = new DecorationItem(roomId,name,material,theme,description,price);
-        item.setId(id);
+        DecorationItem item = new DecorationItem(id, roomId, name, material, theme, description, price);
         try {
             dao.update(item);
             NotificationService.getInstance()
@@ -81,26 +71,20 @@ public class DecorationItemManager {
     }
 
     public void deleteDecorationItem() {
-        List<DecorationItem> decorations = dao.findAll();
-        if (decorations.isEmpty()) {
-            System.out.println("There are no DecorationItems available to delete.");
-            return;
-        }
-        System.out.println("Available DecorationItems:");
-        decorations.forEach(r -> System.out.println("  " + r.getId() + " → " + r.getName()));
-        int id = InputHandler.readInt("Enter DecorationItem ID to delete: ");
+        listDecorationItems();
+
+        int id = readValidDecorationItemId("Enter DecorationItem ID to delete: ");
         try {
-            dao.delete(id);
-            String name = decorations.stream()
-                    .filter(r -> r.getId() == id)
-                    .map(DecorationItem::getName)
-                    .collect(Collectors.joining());
+            DecorationItem decoItem = dao.findById(id);
+            String name = decoItem.getName();
+            dao.delete(decoItem.getId());
             NotificationService.getInstance()
                     .notifyObservers("Deleted DecorationItem: " + name);
         } catch (Exception e) {
             System.out.println("Error deleting DecorationItem: " + e.getMessage());
         }
     }
+
     private Integer readValidOrSkipRoomId(String message) {
         while (true) {
             Integer roomId = InputHandler.readOptionalInt(message);
@@ -111,4 +95,13 @@ public class DecorationItemManager {
         }
     }
 
+    private int readValidDecorationItemId(String message) {
+        while (true) {
+            int id = InputHandler.readInt(message);
+            if (dao.findById(id) != null) {
+                return id;
+            }
+            System.out.println("❌ No DecorationItem exists with ID: " + id + ". Please try again.");
+        }
+    }
 }

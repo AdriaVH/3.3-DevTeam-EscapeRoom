@@ -69,4 +69,25 @@ public class ClueDAOSQL implements ClueDAO {
     public void delete(int id) {
         executor.executeUpdate("DELETE FROM clue WHERE id = ?", id);
     }
+
+    @Override
+    public Clue findById(int id) {
+        ResultSet rs = executor.executeQuery("SELECT * FROM clue WHERE id = ?", id);
+        try {
+            if (rs != null && rs.next()) {
+                return new Clue(
+                        rs.getInt("id"),
+                        rs.getInt("enigma_id"),
+                        rs.getString("name"),
+                        Theme.valueOf(rs.getString("theme")),
+                        rs.getString("description"),
+                        rs.getBigDecimal("price")
+                );
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ Error finding Clue by ID: " + e.getMessage());
+        }
+        return null;
+    }
+
 }

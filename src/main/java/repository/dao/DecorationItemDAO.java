@@ -8,4 +8,5 @@ public interface DecorationItemDAO {
     List<DecorationItem> findAll();
     void update(DecorationItem obj);
     void delete(int id);
+    DecorationItem findById(int id);
 }

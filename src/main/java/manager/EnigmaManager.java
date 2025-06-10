@@ -1,16 +1,12 @@
 package manager;
 
 import observer.NotificationService;
-
 import enums.Theme;
 import model.Enigma;
 import repository.dao.EnigmaDAO;
 import repository.dao.EnigmaDAOSQL;
 import repository.dao.RoomDAOSQL;
 import util.InputHandler;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class EnigmaManager {
     private final EnigmaDAO dao = new EnigmaDAOSQL();
@@ -54,21 +50,15 @@ public class EnigmaManager {
 
 
     public void updateEnigma() {
-        List<Enigma> enigmas = dao.findAll();
-        if (enigmas.isEmpty()) {
-            System.out.println("There are no Enigmas available to update.");
-            return;
-        }
-        System.out.println("Available Enigmas:");
-        enigmas.forEach(r -> System.out.println("  " + r.getId() + " → " + r.getName()));
-        int id = InputHandler.readInt("Enter id: ");
+        listEnigmas();
+
+        int id = readValidEnigmaId("Enter id: ");
         String name = InputHandler.readString("Enter new name");
         int roomID = readValidOrSkipRoomId("Enter new room ID (or press Enter to skip)");
         Theme theme = InputHandler.readEnum(Theme.class, "Enter new theme");
         String description = InputHandler.readString("Enter a new description:");
 
-        Enigma enigma = new Enigma(roomID, name, description, theme);
-        enigma.setId(id);
+        Enigma enigma = new Enigma(id, roomID, name, theme, description);
         try {
             dao.update(enigma);
             NotificationService.getInstance()
@@ -79,20 +69,13 @@ public class EnigmaManager {
     }
 
     public void deleteEnigma() {
-        List<Enigma> enigmas = dao.findAll();
-        if (enigmas.isEmpty()) {
-            System.out.println("There are no Enigmas available to delete.");
-            return;
-        }
-        System.out.println("Available Rooms:");
-        enigmas.forEach(r -> System.out.println("  " + r.getId() + " → " + r.getName()));
-        int id = InputHandler.readInt("Enter Enigma ID to delete: ");
+        listEnigmas();
+
+        int id = readValidEnigmaId("Enter Enigma ID to delete: ");
         try {
-            dao.delete(id);
-            String name = enigmas.stream()
-                    .filter(r -> r.getId() == id)
-                    .map(Enigma::getName)
-                    .collect(Collectors.joining());
+            Enigma enigma = dao.findById(id);
+            String name = enigma.getName();
+            dao.delete(enigma.getId());
             NotificationService.getInstance()
                     .notifyObservers("Deleted Enigma: " + name);
         } catch (Exception e) {
@@ -106,6 +89,15 @@ public class EnigmaManager {
                 return roomId; // Valid or skipped
             }
             System.out.println("❌ No Room exists with ID: " + roomId + ". Please try again.");
+        }
+    }
+    private int readValidEnigmaId(String message) {
+        while (true) {
+            int id = InputHandler.readInt(message);
+            if (dao.findById(id) != null) {
+                return id;
+            }
+            System.out.println("❌ No Enigma exists with ID: " + id + ". Please try again.");
         }
     }
 }
