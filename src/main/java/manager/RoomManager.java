@@ -13,7 +13,7 @@ public class RoomManager {
     private final ScapeRoomDAOSQL scapeRoomDao = new ScapeRoomDAOSQL();
 
     public void createRoom() {
-        Integer scapeRoomId = InputHandler.readValidId(scapeRoomDao::findById,"Enter ScapeRoom ID to assign it to or empty for NO assignation: ");
+        Integer scapeRoomId = readValidOrSkipScapeRoomId("Assign a ScapeRoom using its ID or leave empty for NO assignation: ");
 
         Room.DifficultLevel level = InputHandler.readEnum(Room.DifficultLevel.class, "Enter difficulty level: ");
         Theme theme = InputHandler.readEnum(Theme.class, "Enter theme: ");
@@ -47,10 +47,10 @@ public class RoomManager {
     public void updateRoom() {
         listRooms();
 
-        int id = InputHandler.readValidId(dao::findById,"Enter Room ID to update: ");
-        Integer scapeRoomId = InputHandler.readValidOrSkipId(scapeRoomDao::findById,"Enter ScapeRoom new ID (press 'Enter' to skip OR '0' to leave it WITHOUT ScapeRoom assigned): ");
-        Room.DifficultLevel level = InputHandler.readOptionalEnum(Room.DifficultLevel.class, "Enter new difficulty level (or press Enter to skip): ");
-        Theme theme = InputHandler.readOptionalEnum(Theme.class, "Enter new theme (or press Enter to skip): ");
+        int id = readValidRoomId("Enter Room ID to update: ");
+        int scapeRoomId = readValidOrSkipScapeRoomId("Enter new ScapeRoom ID: ");
+        Room.DifficultLevel level = InputHandler.readEnum(Room.DifficultLevel.class, "Enter new difficulty level: ");
+        Theme theme = InputHandler.readEnum(Theme.class, "Enter new theme: ");
 
         Room room = new Room(id, scapeRoomId, level, theme);
         try {
@@ -65,7 +65,7 @@ public class RoomManager {
     public void deleteRoom() {
         listRooms();
 
-        int id = InputHandler.readValidId(dao::findById,"Enter Room ID to delete: ");
+        int id = readValidRoomId("Enter Room ID to delete: ");
         try {
             Room room = dao.findById(id);
             dao.delete(room.getId());
@@ -73,6 +73,26 @@ public class RoomManager {
                     .notifyObservers("Deleted Room: " + id);
         } catch (Exception e) {
             System.out.println("Error deleting Room: " + e.getMessage());
+        }
+    }
+
+    private Integer readValidOrSkipScapeRoomId(String prompt) {
+        while (true) {
+            Integer scapeRoomId = InputHandler.readOptionalInt(prompt);
+            if (scapeRoomId == null || scapeRoomDao.findById(scapeRoomId) != null) {
+                return scapeRoomId;
+            }
+            System.out.println("❌ No ScapeRoom exists with ID: " + scapeRoomId + ". Please try again.");
+        }
+    }
+
+    private int readValidRoomId(String message) {
+        while (true) {
+            int id = InputHandler.readInt(message);
+            if (dao.findById(id) != null) {
+                return id;
+            }
+            System.out.println("❌ No Room exists with ID: " + id + ". Please try again.");
         }
     }
 }
