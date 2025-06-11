@@ -28,7 +28,9 @@ public class ScapeRoomManager {
         dao.findAll().forEach(s ->
                 System.out.printf("%-4d %-30s%n",
                         s.getId(),
-                        s.getName())
+                        s.getName(),
+                        s.getTicketPrice()!= null ? s.getTicketPrice().toString() : "N/A")
+
         );
     }
 

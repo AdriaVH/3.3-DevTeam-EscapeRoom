@@ -1,17 +1,45 @@
 package model;
 
+import rewards.Rewardable;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public class User{
+public class User implements Rewardable {
+    private int id;
     private String mail;
     private String name;
     private final List<String> notifications = new ArrayList<>();
+    private final List<Reward> rewards = new ArrayList<>();
+
+    public User (int id,String mail, String name){
+        this.id = id;
+        this.mail = mail;
+        this.name = name;
+    }
 
     public User(String mail, String name) {
 
         this.mail = mail;
         this.name = name;
+    }
+
+    @Override
+    public void addReward(Reward reward) {
+        rewards.add(reward);
+    }
+
+    @Override
+    public List<Reward> getRewards() {
+        return new ArrayList<>(rewards);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getMail() {

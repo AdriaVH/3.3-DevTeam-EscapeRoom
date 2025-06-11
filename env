@@ -1,5 +1,0 @@
-# .env - Configuration file
-
-DB_URL=jdbc:mysql://mysql-scaperoom-scaperoomdb.g.aivencloud.com:10188/scaperoom
-DB_USER=avnadmin
-DB_PASSWORD=AVNS_cbGns0lTZ4OiYfh26SH
