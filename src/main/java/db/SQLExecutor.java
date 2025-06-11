@@ -1,6 +1,5 @@
 package db;
 
-
 import java.sql.*;
 
 public class SQLExecutor {
@@ -69,5 +68,4 @@ public class SQLExecutor {
             }
         }
     }
-
 }
