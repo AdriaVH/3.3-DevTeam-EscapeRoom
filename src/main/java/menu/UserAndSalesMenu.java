@@ -19,7 +19,7 @@ public class UserAndSalesMenu {
             System.out.println("1. Buy ScapeRoom ticket");
             System.out.println("2. Sign-up for notifications");
             System.out.println("3. Sign-out for notifications");
-            System.out.println("4. See your achivements and rewards");
+            System.out.println("4. See your achievements and rewards");
             System.out.println("0. Back");
             option = InputHandler.readInt("Choose an option: ");
 
