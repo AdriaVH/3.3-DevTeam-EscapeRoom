@@ -7,25 +7,16 @@ public class ScapeRoom {
     private String name;
     private BigDecimal ticketPrice;
 
-    //Nou constructor amb el price (BigDecimal)
-
     public ScapeRoom(int id, String name,  BigDecimal ticketPrice) {
         this.id = id;
         this.name = name;
         this.ticketPrice = ticketPrice;
 
     }
-    public ScapeRoom(int id, String name) {
-        this.id = id;
+
+    public ScapeRoom(String name , BigDecimal ticketPrice) {
         this.name = name;
-
-    }
-
-    public ScapeRoom(String name) {
-        this.name = name;
-    }
-
-    public BigDecimal getTicketPrice() { return getTicketPrice();
+        this.ticketPrice = ticketPrice;
     }
 
     public int getId() {
@@ -42,5 +33,20 @@ public class ScapeRoom {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public BigDecimal getTicketPrice() {
+        return ticketPrice;
+    }
+
+    public void setTicketPrice(BigDecimal ticketPrice) {
+        this.ticketPrice = ticketPrice;
+    }
+
+    @Override
+    public String toString() {
+        return "ScapeRoom: " + name + "\n" +
+                "ID: " + id + "\n" +
+                "Ticket price: " + ticketPrice + "\n";
     }
 }

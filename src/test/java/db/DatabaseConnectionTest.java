@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,6 +22,8 @@ class DatabaseConnectionTest {
             assertNotNull(connection, "Connection shouldn't be null");
             assertFalse(connection.isClosed(), "Connection shouldn't be closed");
             System.out.println("✅ Connection done!!");
+            Statement statement = connection.createStatement();
+            statement.executeQuery("SELECT * FROM room");
         } catch (SQLException e) {
             fail("❌ Error: " + e.getMessage());
         }

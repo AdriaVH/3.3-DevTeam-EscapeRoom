@@ -19,7 +19,6 @@ public class User implements Rewardable {
     }
 
     public User(String mail, String name) {
-
         this.mail = mail;
         this.name = name;
     }

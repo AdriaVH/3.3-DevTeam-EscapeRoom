@@ -142,6 +142,4 @@ public class InputHandler {
             System.out.println("❌ No " + name + " exists with ID: " + id + ". Please try again.");
         }
     }
-
-
 }

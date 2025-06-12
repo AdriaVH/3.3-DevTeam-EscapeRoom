@@ -10,6 +10,6 @@ public class Main {
         UserObserver uo2 = new UserObserver(user2);
         NotificationService.getInstance().attach(uo1);
         NotificationService.getInstance().attach(uo2);
-        new menu.MainMenu().start();
+        new menu.MainMenu(user1).start();
     }
 }
