@@ -50,4 +50,13 @@ public class Room {
     public enum DifficultLevel {
         EASY, MEDIUM, HARD
     }
+
+    @Override
+    public String toString() {
+        return "Room: " + "\n" +
+                "ID: " + id + "\n" +
+                "ScapeRoomId: " + scapeRoomId + "\n" +
+                "Difficult Level: " + difficultLevel + "\n" +
+                "Theme: " + theme;
+    }
 }

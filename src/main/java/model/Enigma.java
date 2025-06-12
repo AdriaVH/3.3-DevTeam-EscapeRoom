@@ -30,4 +30,13 @@ public class Enigma extends Item {
     public void setTheme(Theme theme) {
         this.theme = theme;
     }
+
+    @Override
+    public String toString() {
+        return "Enigma: " + super.getName() + "\n" +
+                "ID: " + super.getId() + "\n" +
+                "Room Id: " + roomId + "\n" +
+                "Theme: " + theme + "\n" +
+                "Description: " + super.getDescription() + "\n";
+    }
 }

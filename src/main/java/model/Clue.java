@@ -28,11 +28,32 @@ public class Clue extends Item {
         return enigmaId;
     }
 
+    public void setEnigmaId(Integer enigmaId) {
+        this.enigmaId = enigmaId;
+    }
+
     public Theme getTheme() {
         return theme;
     }
 
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
+
     public BigDecimal getPrice() {
         return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Clue: " + super.getName() + "\n" +
+                "ID: " + super.getId() + "\n" +
+                "EnigmaId: " + enigmaId + "\n" +
+                "Theme: " + theme + "\n" +
+                "Price: " + price;
     }
 }

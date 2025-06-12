@@ -31,6 +31,10 @@ public class DecorationItem extends Item {
         return roomId;
     }
 
+    public void setRoomId(Integer roomId) {
+        this.roomId = roomId;
+    }
+
     public Material getMaterial() {
         return material;
     }
@@ -57,5 +61,15 @@ public class DecorationItem extends Item {
 
     public enum Material {
         WOOD, METAL, PLASTIC, PAPER, CRYSTAL
+    }
+
+    @Override
+    public String toString() {
+        return "DecorationItem: " + super.getName() + "\n" +
+                "ID: " + super.getId() + "\n" +
+                "RoomId: " + roomId + "\n" +
+                "Material: " + material + "\n" +
+                "Theme: " + theme + "\n" +
+                "Price: " + price;
     }
 }
