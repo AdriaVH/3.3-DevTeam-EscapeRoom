@@ -5,12 +5,12 @@ import java.math.BigDecimal;
 public class ScapeRoom {
     private int id;
     private String name;
-    private BigDecimal ticketPrice;
+    private BigDecimal ticket_Price;
 
     public ScapeRoom(int id, String name,  BigDecimal ticketPrice) {
         this.id = id;
         this.name = name;
-        this.ticketPrice = ticketPrice;
+        this.ticket_Price = ticketPrice;
 
     }
 
@@ -21,7 +21,7 @@ public class ScapeRoom {
 
     public ScapeRoom(String name , BigDecimal ticketPrice) {
         this.name = name;
-        this.ticketPrice = ticketPrice;
+        this.ticket_Price = ticketPrice;
     }
 
     public int getId() {
@@ -41,17 +41,17 @@ public class ScapeRoom {
     }
 
     public BigDecimal getTicketPrice() {
-        return ticketPrice;
+        return ticket_Price;
     }
 
     public void setTicketPrice(BigDecimal ticketPrice) {
-        this.ticketPrice = ticketPrice;
+        this.ticket_Price = ticketPrice;
     }
 
     @Override
     public String toString() {
         return "ScapeRoom: " + name + "\n" +
                 "ID: " + id + "\n" +
-                "Ticket price: " + ticketPrice + "\n";
+                "Ticket price: " + ticket_Price + "\n";
     }
 }
