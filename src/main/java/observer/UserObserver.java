@@ -1,18 +1,18 @@
 package observer;
 
-import model.User;
+import model.Player;
 
 public class UserObserver implements Observer {
-    private final User user;
+    private final Player player;
 
-    public UserObserver(User user) {
-        this.user = user;
+    public UserObserver(Player player) {
+        this.player = player;
     }
 
     @Override
     public void update(String event) {
-        user.addNotification(event);
+        player.addNotification(event);
         System.out.printf(">>> Notification for %s (%s): %s%n",
-                          user.getName(), user.getMail(), event);
+                          player.getName(), player.getMail(), event);
     }
 }

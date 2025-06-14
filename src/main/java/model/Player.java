@@ -5,20 +5,20 @@ import rewards.Rewardable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class User implements Rewardable {
+public class Player implements Rewardable {
     private int id;
     private String mail;
     private String name;
     private final List<String> notifications = new ArrayList<>();
     private final List<Reward> rewards = new ArrayList<>();
 
-    public User (int id,String mail, String name){
+    public Player(int id, String mail, String name){
         this.id = id;
         this.mail = mail;
         this.name = name;
     }
 
-    public User(String mail, String name) {
+    public Player(String mail, String name) {
         this.mail = mail;
         this.name = name;
     }

@@ -1,21 +1,21 @@
 package menu;
 
-import manager.UserManager;
-import model.User;
+import manager.PlayerManager;
+import model.Player;
 import util.InputHandler;
 
-public class UserAndSalesMenu {
-    private final UserManager userManager;
+public class PlayerAndSalesMenu {
+    private final PlayerManager userManager;
 
-    public UserAndSalesMenu(User currentUser) {
-        this.userManager = new UserManager(currentUser);
+    public PlayerAndSalesMenu(Player currentPlayer) {
+        this.userManager = new PlayerManager(currentPlayer);
     }
 
 
     public void show() {
         int option;
         do {
-            System.out.println("\n--- User & Sales Menu ---");
+            System.out.println("\n--- Player & Sales Menu ---");
             System.out.println("1. Buy ScapeRoom ticket");
             System.out.println("2. Sign-up for notifications");
             System.out.println("3. Sign-out for notifications");

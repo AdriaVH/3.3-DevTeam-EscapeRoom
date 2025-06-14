@@ -13,7 +13,7 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
 
     @Override
     public void insert(ScapeRoom obj) {
-        executor.executeUpdate("INSERT INTO scaperoom (name) VALUES (?)", obj.getName());
+        executor.executeUpdate("INSERT INTO scaperoom (name, ticket_price) VALUES (?,?)", obj.getName(), obj.getTicketPrice());
     }
     @Override
     public ScapeRoom findById(int id) {
@@ -23,8 +23,10 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
             if (rs != null && rs.next()) {
                 return new ScapeRoom(
                         rs.getInt("id"),
-                        rs.getString("name")
+                        rs.getString("name"),
+                        rs.getBigDecimal("ticket_price")
                 );
+
             }
         } catch (SQLException e) {
             System.err.println("❌ Error finding ScapeRoom by ID: " + e.getMessage());
@@ -45,10 +47,11 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
 
         try {
             while (rs.next()) {
-                ScapeRoom scapeRoom = new ScapeRoom(
+                ScapeRoom scRoom = new ScapeRoom(
                         rs.getInt("id"),
-                        rs.getString("name"));
-                scapeRooms.add(scapeRoom);
+                        rs.getString("name"),
+                        rs.getBigDecimal("ticket_price"));
+                scapeRooms.add(scRoom);
             }
         } catch (SQLException e) {
             System.err.println("❌ Error reading scaperooms: " + e.getMessage());
@@ -59,7 +62,10 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
 
     @Override
     public void update(ScapeRoom obj) {
-        executor.executeUpdate("UPDATE scaperoom SET name = ? WHERE id = ?", obj.getName(), obj.getId());
+        executor.executeUpdate("UPDATE scaperoom SET name = ? WHERE id = ?",
+                obj.getName(),
+                obj.getId(),
+                obj.getTicketPrice());
     }
 
     @Override

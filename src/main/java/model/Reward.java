@@ -1,16 +1,16 @@
 package model;
 
 public class Reward {
-    private String description;
+    private String descroption;
     private int points;
 
-    public Reward(String description, int points) {
-        this.description = description;
+    public Reward(String descroption, int points) {
+        this.descroption = descroption;
         this.points = points;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDescroption() {
+        return descroption;
     }
     public int getPoints() {
         return points;
@@ -18,8 +18,9 @@ public class Reward {
 
     @Override
     public String toString() {
-        return "Reward: \n" +
-                "Description: " + description + "\n" +
-                "Points: " + points;
+        return "Reward{" +
+                "descroption='" + descroption + '\'' +
+                ", points=" + points +
+                '}';
     }
 }

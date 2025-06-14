@@ -6,16 +6,19 @@ import repository.dao.ScapeRoomDAO;
 import repository.dao.ScapeRoomDAOSQL;
 import util.InputHandler;
 
+import java.math.BigDecimal;
+
 public class ScapeRoomManager {
     private final ScapeRoomDAO dao = new ScapeRoomDAOSQL();
 
     public void createScapeRoom() {
         String name = InputHandler.readString("Enter ScapeRoom name: ");
-        ScapeRoom obj = new ScapeRoom(name);
+        BigDecimal ticketPrice = InputHandler.readBigDecimal("Enter ScapeRoom ticket price: ");
+        ScapeRoom obj = new ScapeRoom(name,ticketPrice);
         try {
             dao.insert(obj);
             NotificationService.getInstance()
-                    .notifyObservers("Created new EscapeRoom: " + name);
+                    .notifyObservers("Created new EscapeRoom: " + name + "." + ticketPrice + "€");
         } catch (Exception e) {
             System.out.println("Error creating EscapeRoom: " + e.getMessage());
         }
