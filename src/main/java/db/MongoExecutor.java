@@ -19,11 +19,11 @@ public class MongoExecutor {
             System.setProperty("jdk.tls.client.protocols", "TLSv1.2");
 
             // Load environment variables
-            Dotenv dotenv = Dotenv.configure().filename(".env.mongo").load();
+            Dotenv dotenv = Dotenv.configure().filename(".env").load();
             String uri = dotenv.get("MONGO_URI");
 
             if (uri == null || uri.isEmpty()) {
-                throw new RuntimeException("MONGO_URI not found in .env.mongo");
+                throw new RuntimeException("MONGO_URI not found in .env");
             }
 
             this.client = MongoClients.create(uri);
