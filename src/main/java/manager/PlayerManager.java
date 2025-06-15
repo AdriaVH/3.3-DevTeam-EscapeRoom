@@ -34,7 +34,7 @@ public class PlayerManager {
         Player player = playerDao.findById(id);
 
         if(scapeRoom!=null && player != null){
-            Ticket ticket = new Ticket(scapeRoom , player);
+            Ticket ticket = new Ticket(scapeRoom,player);
             player.addTicket(ticket);
             System.out.println("Player " + player.getName() + " has bought a ticket for ScapeRoom " + scapeRoom.getName() +
                     ". Price :"+scapeRoom.getTicketPrice());

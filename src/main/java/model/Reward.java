@@ -1,25 +1,38 @@
 package model;
 
 public class Reward {
+    private String playerMail;
+    private String type;
     private String description;
-    private int points;
 
-    public Reward(String description, int points) {
+    public Reward(String playerMail, String type, String description) {
+        this.playerMail = playerMail;
+        this.type = type;
         this.description = description;
-        this.points = points;
     }
 
-    public String getDescroption() {
-        return description;
+    public String getPlayerMail() {
+        return playerMail;
     }
-    public int getPoints() {
-        return points;
+
+    public void setPlayerMail(String playerMail) {
+        this.playerMail = playerMail;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     @Override
     public String toString() {
-        return "Reward: " + "\n" +
-                "Description: " + description + "\n" +
-                "Points: " + points;
+        return "Reward{" +
+                "playerMail='" + playerMail + '\'' +
+                ", type='" + type + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
