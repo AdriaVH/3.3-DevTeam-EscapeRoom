@@ -4,21 +4,21 @@ import manager.PlayerManager;
 import util.InputHandler;
 
 public class PlayerAndSalesMenu {
-    private final PlayerManager userManager = new PlayerManager();
+    private final PlayerManager playerManager = new PlayerManager();
 
     /*public PlayerAndSalesMenu(Player currentPlayer) {
         this.userManager = new PlayerManager(currentPlayer);
     }*/
 
     public void showPlayers(){
-        userManager.listUsers();
+        playerManager.listUsers();
         InputHandler.readInt("Select a player");
 
     }
 
     public void show() {
         int player;
-        userManager.listUsers();
+        playerManager.listUsers();
         player = InputHandler.readInt("Select a player");
 
         int option;
@@ -32,9 +32,9 @@ public class PlayerAndSalesMenu {
             option = InputHandler.readInt("Choose an option: ");
 
             switch (option) {
-                case 1 -> userManager.buyScapeRoomTicket(player);
-                case 2 -> userManager.signUpUserForNotifications(player);
-                case 3 -> userManager.signOutScapeRoomNotifications(player);
+                case 1 -> playerManager.buyScapeRoomTicket(player);
+                case 2 -> playerManager.signUpUserForNotifications(player);
+                case 3 -> playerManager.signOutScapeRoomNotifications(player);
                 case 4 -> System.out.println("userManager.function()");
                 case 0 -> System.out.println("🔙 Returning...");
                 default -> System.out.println("❌ Invalid option.");

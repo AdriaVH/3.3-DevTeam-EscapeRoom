@@ -15,24 +15,26 @@ public class MongoExecutor {
 
     private MongoExecutor() {
         try {
-            // Ensure TLS 1.2 is used for secure connection
             System.setProperty("jdk.tls.client.protocols", "TLSv1.2");
 
-            // Load environment variables
-            Dotenv dotenv = Dotenv.configure().filename(".env.mongo").load();
-            String uri = dotenv.get("MONGO_URI");
+            Dotenv dotenv = Dotenv.configure()
+                    .filename(".env.mongo")
+                    .load();
 
-            if (uri == null || uri.isEmpty()) {
-                throw new RuntimeException("MONGO_URI not found in .env.mongo");
+            String uri = dotenv.get("MONGO_URI");
+            String dbName = dotenv.get("MONGO_DATABASE");
+
+            if (uri == null || dbName == null || uri.isEmpty() || dbName.isEmpty()) {
+                throw new RuntimeException("❌ Missing MONGO_URI or MONGO_DATABASE in .env.mongo");
             }
 
             this.client = MongoClients.create(uri);
-            this.database = client.getDatabase("scaperoom");
+            this.database = client.getDatabase(dbName);
 
-            // Test connection
+            // Optional ping test
             Document ping = new Document("ping", 1);
             database.runCommand(ping);
-            System.out.println("✅ Successfully connected to MongoDB.");
+            System.out.println("✅ Connected to MongoDB database: " + dbName);
 
         } catch (Exception e) {
             System.err.println("❌ MongoDB connection failed: " + e.getMessage());

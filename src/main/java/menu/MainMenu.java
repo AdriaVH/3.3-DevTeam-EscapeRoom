@@ -20,7 +20,7 @@ public class MainMenu {
             System.out.println("1. Manage ScapeRooms");
             System.out.println("2. Manage Rooms");
             System.out.println("3. Manage Items");
-            System.out.println("4. Manage Users");
+            System.out.println("4. Manage Players");
 
             System.out.println("0. Exit");
             option = InputHandler.readInt("Choose an option: ");
