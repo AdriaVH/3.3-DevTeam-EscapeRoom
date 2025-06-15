@@ -33,7 +33,6 @@ public class ScapeRoomManager {
                         s.getId(),
                         s.getName(),
                         s.getTicketPrice()!= null ? s.getTicketPrice().toString() : "N/A")
-
         );
     }
 

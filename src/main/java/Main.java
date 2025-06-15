@@ -10,12 +10,13 @@ public class Main {
         Player player = new Player("ignasi@escape.com", "Ignasi");
         PlayerDAOMongo dao = new PlayerDAOMongo();
         dao.insert(player1);
+        dao.insert(player);
+        dao.insert(player2);
         UserObserver uo1 = new UserObserver(player1);
         UserObserver uo2 = new UserObserver(player2);
         NotificationService.getInstance().attach(uo1);
         NotificationService.getInstance().attach(uo2);
 
-
-        //new menu.MainMenu().start();
+        new menu.MainMenu().start();
     }
 }

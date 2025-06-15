@@ -11,6 +11,7 @@ public class Player implements Rewardable {
     private String name;
     private final List<String> notifications = new ArrayList<>();
     private final List<Reward> rewards = new ArrayList<>();
+    private final List<Ticket> tickets = new ArrayList<>();
 
     public Player(int id, String mail, String name){
         this.id = id;
@@ -33,12 +34,24 @@ public class Player implements Rewardable {
         return new ArrayList<>(rewards);
     }
 
-    public int getId() {
-        return id;
+    public void addNotification(String message) {
+        notifications.add(message);
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public List<String> getNotifications() {
+        return new ArrayList<>(notifications);
+    }
+
+    public void addTicket(Ticket ticket) {
+        tickets.add(ticket);
+    }
+
+    public List<Ticket> getTickets() {
+        return new ArrayList<>(tickets);
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getMail() {
@@ -57,12 +70,13 @@ public class Player implements Rewardable {
         this.name = name;
     }
 
-    public void addNotification(String message) {
-        notifications.add(message);
+    @Override
+    public String toString() {
+        return "Player: " + name + "\n" +
+                "Id: " + id + "\n" +
+                "Mail: " + mail + "\n" +
+                "Notifications: " + notifications + "\n" +
+                "Rewards: " + rewards + "\n" +
+                "Ticket: " + tickets;
     }
-
-    public List<String> getNotifications() {
-        return new ArrayList<>(notifications);
-    }
-
 }

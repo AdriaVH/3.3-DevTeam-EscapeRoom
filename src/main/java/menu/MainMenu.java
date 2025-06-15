@@ -7,11 +7,11 @@ public class MainMenu {
     private final ScapeRoomMenu scapeRoomMenu = new ScapeRoomMenu();
     private final RoomMenu roomMenu = new RoomMenu();
     private final ItemMenu itemMenu = new ItemMenu();
-    private final PlayerAndSalesMenu userMenu;
+    private final PlayerAndSalesMenu userMenu = new PlayerAndSalesMenu();
 
-    public MainMenu(Player currentPlayer) {
+    /*public MainMenu(Player currentPlayer) {
         this.userMenu = new PlayerAndSalesMenu(currentPlayer);
-    }
+    }*/
 
     public void start() {
         int option;

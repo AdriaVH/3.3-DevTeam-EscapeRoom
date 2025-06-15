@@ -9,6 +9,14 @@ public class UserObserver implements Observer {
         this.player = player;
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public int getId (){
+        return player.getId();
+    }
+
     @Override
     public void update(String event) {
         player.addNotification(event);

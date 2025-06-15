@@ -1,18 +1,26 @@
 package menu;
 
 import manager.PlayerManager;
-import model.Player;
 import util.InputHandler;
 
 public class PlayerAndSalesMenu {
-    private final PlayerManager userManager;
+    private final PlayerManager userManager = new PlayerManager();
 
-    public PlayerAndSalesMenu(Player currentPlayer) {
+    /*public PlayerAndSalesMenu(Player currentPlayer) {
         this.userManager = new PlayerManager(currentPlayer);
+    }*/
+
+    public void showPlayers(){
+        userManager.listUsers();
+        InputHandler.readInt("Select a player");
+
     }
 
-
     public void show() {
+        int player;
+        userManager.listUsers();
+        player = InputHandler.readInt("Select a player");
+
         int option;
         do {
             System.out.println("\n--- Player & Sales Menu ---");
@@ -24,9 +32,9 @@ public class PlayerAndSalesMenu {
             option = InputHandler.readInt("Choose an option: ");
 
             switch (option) {
-                case 1 -> userManager.buyScapeRoomTicket();
-                case 2 -> userManager.signUpUserForNotifications();
-                case 3 -> userManager.signOutScapeRoomNotifications();
+                case 1 -> userManager.buyScapeRoomTicket(player);
+                case 2 -> userManager.signUpUserForNotifications(player);
+                case 3 -> userManager.signOutScapeRoomNotifications(player);
                 case 4 -> System.out.println("userManager.function()");
                 case 0 -> System.out.println("🔙 Returning...");
                 default -> System.out.println("❌ Invalid option.");

@@ -26,12 +26,10 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
                         rs.getString("name"),
                         rs.getBigDecimal("ticket_price")
                 );
-
             }
         } catch (SQLException e) {
             System.err.println("❌ Error finding ScapeRoom by ID: " + e.getMessage());
         }
-
         return null;
     }
 
