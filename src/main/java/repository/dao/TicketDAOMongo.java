@@ -16,9 +16,9 @@ public class TicketDAOMongo {
 
     public void insert(Ticket ticket) {
         Document doc = new Document("playerMail", ticket.getPlayerMail())
-                .append("roomId", ticket.getScapeRoomId())
-                .append("date", ticket.getDate().toString());
+                .append("roomId", ticket.getScapeRoomId());
         collection.insertOne(doc);
+        //Per inserir fa falta player.getMail & scapeRoom.getName
     }
 
     public List<Ticket> findByPlayerMail(String mail) {
@@ -26,9 +26,7 @@ public class TicketDAOMongo {
         for (Document doc : collection.find(Filters.eq("playerMail", mail))) {
             tickets.add(new Ticket(
                     doc.getString("playerMail"),
-                    doc.getInteger("roomId"),
-                    LocalDate.parse(doc.getString("date"))
-            ));
+                    doc.getInteger("roomId"));
         }
         return tickets;
     }

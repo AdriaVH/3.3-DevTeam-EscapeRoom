@@ -3,6 +3,7 @@ package repository.dao;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import db.MongoExecutor;
+import model.Player;
 import model.Reward;
 import org.bson.Document;
 
@@ -15,7 +16,6 @@ public class RewardDAOMongo {
 
     public void insert(Reward reward) {
         Document doc = new Document("playerMail", reward.getPlayerMail())
-                .append("type", reward.getType())
                 .append("description", reward.getDescription());
         collection.insertOne(doc);
     }
@@ -24,8 +24,7 @@ public class RewardDAOMongo {
         List<Reward> rewards = new ArrayList<>();
         for (Document doc : collection.find(Filters.eq("playerMail", mail))) {
             rewards.add(new Reward(
-                    doc.getString("playerMail"),
-                    doc.getString("type"),
+                    (Player) doc.get("playerMail"),
                     doc.getString("description")));
         }
         return rewards;

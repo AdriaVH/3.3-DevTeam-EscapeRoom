@@ -1,26 +1,20 @@
 package model;
 
 public class Reward {
-    private String playerMail;
-    private String type;
+    private Player player;
     private String description;
 
-    public Reward(String playerMail, String type, String description) {
-        this.playerMail = playerMail;
-        this.type = type;
+    public Reward(Player player, String description) {
+        this.player = player;
         this.description = description;
     }
 
     public String getPlayerMail() {
-        return playerMail;
+        return player.getMail();
     }
 
     public void setPlayerMail(String playerMail) {
-        this.playerMail = playerMail;
-    }
-
-    public String getType() {
-        return type;
+        this.player.setMail(playerMail);
     }
 
     public String getDescription() {
@@ -29,10 +23,8 @@ public class Reward {
 
     @Override
     public String toString() {
-        return "Reward{" +
-                "playerMail='" + playerMail + '\'' +
-                ", type='" + type + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "Reward: " + "\n" +
+                "PlayerMail: " + player.getMail() + "\n" +
+                "Description: " + description;
     }
 }

@@ -40,10 +40,10 @@ public class PlayerService {
         System.out.println("🎁 Reward added to: " + mail);
     }
 
-    public void addTicketToPlayer(String mail, Ticket ticket) {
-        ticket.setPlayerMail(mail);
+    public void addTicketToPlayer(String playerMail, Ticket ticket) {
+        ticket.setPlayerMail(playerMail);
         ticketDAO.insert(ticket);
-        System.out.println("🎫 Ticket added to: " + mail);
+        System.out.println("🎫 Ticket added to: " + playerMail);
     }
 
     public List<Reward> getRewardsForPlayer(String mail) {

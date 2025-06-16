@@ -33,4 +33,16 @@ public class Ticket {
     public BigDecimal getTicketPrice(){
         return scapeRoom.getTicketPrice();
     }
+
+    public String getPlayerMail() {
+        return player.getMail();
+    }
+
+    public void setPlayerMail(String playerMail){
+        this.player.setMail(playerMail);
+    }
+
+    public int getScapeRoomId(){
+        return scapeRoom.getId();
+    }
 }
