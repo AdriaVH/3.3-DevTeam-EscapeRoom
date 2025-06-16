@@ -3,6 +3,8 @@ package repository.dao;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import db.MongoExecutor;
+import model.Player;
+import model.ScapeRoom;
 import model.Ticket;
 import org.bson.Document;
 
@@ -25,8 +27,8 @@ public class TicketDAOMongo {
         List<Ticket> tickets = new ArrayList<>();
         for (Document doc : collection.find(Filters.eq("playerMail", mail))) {
             tickets.add(new Ticket(
-                    doc.getString("playerMail"),
-                    doc.getInteger("roomId"));
+                    (ScapeRoom) doc.get("roomId"),
+                    (Player) doc.get("playerMail")));
         }
         return tickets;
     }
