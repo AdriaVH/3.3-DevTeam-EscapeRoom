@@ -1,4 +1,5 @@
 import model.Player;
+import model.Reward;
 import observer.NotificationService;
 import observer.UserObserver;
 import repository.dao.PlayerDAOMongo;
@@ -9,6 +10,8 @@ public class Main {
         Player player2 = new Player("Morenito_reshulon@hotmail.com", "Eusebio");
         Player player = new Player("ignasi@escape.com", "Ignasi");
         Player player3 = new Player("tonyroisterjr@drummer.cat", "Anthony");
+        Reward reward1 = new Reward(player1, "You won a bag of dicks");
+
         PlayerDAOMongo dao = new PlayerDAOMongo();
         dao.insert(player1);
         dao.insert(player2);

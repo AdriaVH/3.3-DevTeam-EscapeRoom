@@ -1,11 +1,9 @@
 package model;
 
-import rewards.Rewardable;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements Rewardable {
+public class Player {
     private int id;
     private String mail;
     private String name;
@@ -22,16 +20,6 @@ public class Player implements Rewardable {
     public Player(String mail, String name) {
         this.mail = mail;
         this.name = name;
-    }
-
-    @Override
-    public void addReward(Reward reward) {
-        rewards.add(reward);
-    }
-
-    @Override
-    public List<Reward> getRewards() {
-        return new ArrayList<>(rewards);
     }
 
     public void addNotification(String message) {

@@ -9,6 +9,7 @@ public class Reward {
         this.description = description;
     }
 
+    public Player getPlayer() { return this.player;}
     public String getPlayerMail() {
         return player.getMail();
     }

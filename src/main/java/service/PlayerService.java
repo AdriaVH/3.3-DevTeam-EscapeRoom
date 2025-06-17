@@ -4,7 +4,6 @@ import model.Player;
 import model.Reward;
 import model.Ticket;
 import repository.dao.PlayerDAOMongo;
-import repository.dao.RewardDAOMongo;
 import repository.dao.TicketDAOMongo;
 
 import java.util.List;
