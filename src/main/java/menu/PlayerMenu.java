@@ -3,12 +3,15 @@ package menu;
 import manager.PlayerManager;
 import manager.RewardManager;
 import manager.TicketManager;
+import repository.dao.PlayerDAO;
+import repository.dao.PlayerDAOSQL;
 import util.InputHandler;
 
 public class PlayerMenu {
     private final PlayerManager playerManager = new PlayerManager();
     private final RewardManager rewardManager = new RewardManager();
     private final TicketManager ticketManager = new TicketManager();
+    private final PlayerDAO dao = new PlayerDAOSQL();
 
     /*public PlayerAndSalesMenu(Player currentPlayer) {
         this.userManager = new PlayerManager(currentPlayer);
@@ -32,8 +35,7 @@ public class PlayerMenu {
         System.out.println("-".repeat(35)); // footer separator
 
 
-        playerId = InputHandler.readInt("Select a player: "); //canviar el mode de selecció
-
+        playerId = InputHandler.readValidId(dao::findById,"Select player by ID: "); //canviar el mode de selecció
 
         int option;
         do {
