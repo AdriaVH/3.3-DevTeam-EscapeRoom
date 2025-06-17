@@ -6,9 +6,9 @@ import service.PlayerService;
 
 public class Main {
     public static void main(String[] args) {
-        */PlayerService service = new PlayerService();
+        PlayerService service = new PlayerService();
 
-        service.addPlayer("Benito", "mail@mail.cat");
+       /*Service.addPlayer("Benito", "mail@mail.cat");
         Player player1 = new Player("Manuelito@gmail.com","Jose");
         Player player2 = new Player("Morenito_reshulon@hotmail.com", "Eusebio");
         Player player = new Player("ignasi@escape.com", "Ignasi");
@@ -21,7 +21,8 @@ public class Main {
        UserObserver uo1 = new UserObserver(player1);
         UserObserver uo2 = new UserObserver(player2);
         NotificationService.getInstance().attach(uo1);
-        NotificationService.getInstance().attach(uo2);/*
+        NotificationService.getInstance().attach(uo2);
+        */
 
         new menu.MainMenu().start();
     }

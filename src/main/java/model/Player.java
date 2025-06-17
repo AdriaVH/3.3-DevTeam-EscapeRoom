@@ -1,7 +1,5 @@
 package model;
 
-import rewards.Rewardable;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,7 +11,7 @@ public class Player {
     private final List<Reward> rewards = new ArrayList<>();
     private final List<Ticket> tickets = new ArrayList<>();
 
-    public Player(int id, String mail, String name){
+    public Player(int id, String mail, String name) {
         this.id = id;
         this.mail = mail;
         this.name = name;
@@ -22,16 +20,6 @@ public class Player {
     public Player(String mail, String name) {
         this.mail = mail;
         this.name = name;
-    }
-
-    @Override
-    public void addReward(Reward reward) {
-        rewards.add(reward);
-    }
-
-    @Override
-    public List<Reward> getRewards() {
-        return new ArrayList<>(rewards);
     }
 
     public void addNotification(String message) {
