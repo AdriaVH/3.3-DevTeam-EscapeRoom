@@ -33,8 +33,9 @@ public class PlayerMenu {
             System.out.println("1. Assign ScapeRoom ticket");
             System.out.println("2. Sign-up for notifications");
             System.out.println("3. Sign-out for notifications");
-            System.out.println("4. See your rewards");
-            System.out.println("5. See all assigned tickets");
+            System.out.println("4. Assign a reward");
+            System.out.println("5. See your rewards");
+            System.out.println("6. See all assigned tickets");
             System.out.println("0. Back");
             option = InputHandler.readInt("Choose an option: ");
 
@@ -42,8 +43,9 @@ public class PlayerMenu {
                 case 1 -> playerManager.buyScapeRoomTicket(playerId);
                 case 2 -> playerManager.signUpUserForNotifications(playerId);
                 case 3 -> playerManager.signOutScapeRoomNotifications(playerId);
-                case 4 -> rewardManager.listRewards(playerId);
-                case 5 -> ticketManager.listTicketsByPlayerId(playerId);
+                case 4 -> playerManager.assignRewardToAPlayer(playerId);
+                case 5 -> rewardManager.listRewards(playerId);
+                case 6 -> ticketManager.listTicketsByPlayerId(playerId);
                 case 0 -> System.out.println("🔙 Returning...");
                 default -> System.out.println("❌ Invalid option.");
             }

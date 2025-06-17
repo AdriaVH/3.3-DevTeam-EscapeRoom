@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RewardDAOSQL implements RewardDAO{
+public class RewardDAOSQL implements RewardDAO {
     private final SQLExecutor executor = SQLExecutor.getInstance();
 
     public void insert(Reward reward) {
@@ -59,5 +59,23 @@ public class RewardDAOSQL implements RewardDAO{
             System.err.println("❌ Error reading all rewards: " + e.getMessage());
         }
         return rewards;
+    }
+
+    public Reward findRewardById(int id) {
+        Reward reward = null;
+        String sql = "SELECT * FROM reward WHERE id = ?";
+
+        try {
+            ResultSet rs = executor.executeQuery(sql, id);
+            if (rs != null && rs.next()) {
+                reward = new Reward(
+                        rs.getInt("id"),
+                        rs.getString("description"));
+            }
+        } catch (SQLException e) {
+            System.err.println("❌ Error finding reward by ID: " + e.getMessage());
+        }
+
+        return reward;
     }
 }

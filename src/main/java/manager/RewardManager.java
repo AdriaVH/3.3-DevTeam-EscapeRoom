@@ -1,11 +1,13 @@
 package manager;
 
 import model.Player;
+import model.Reward;
 import repository.dao.*;
 
 public class RewardManager {
 
     private final RewardDAO daoReward = new RewardDAOSQL();
+
     public void listRewards(int playerId) {
         PlayerDAO daoPlayer = new PlayerDAOSQL();
         Player player = daoPlayer.findById(playerId);

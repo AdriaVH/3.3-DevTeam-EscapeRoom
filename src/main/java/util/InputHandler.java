@@ -13,6 +13,20 @@ public class InputHandler {
         return scanner.nextLine();
     }
 
+    public static String readStringNotNull(String prompt) {
+        while (true) {
+            System.out.print(prompt);
+            String input = scanner.nextLine();
+
+            if (input == null || input.trim().isEmpty()) {
+                System.out.println("❌ Input cannot be empty. Try again.");
+            } else {
+                return input.trim();
+            }
+        }
+    }
+
+
     public static int readInt(String prompt) {
         while (true) {
             try {
@@ -53,9 +67,9 @@ public class InputHandler {
         System.out.print(prompt);
         String input = scanner.nextLine().trim();
         if (input.isBlank()) {
-            return null; // Optional: user left it empty
+            return null;
         }
-        return input; // Return the valid input
+        return input;
     }
 
     public static <T extends Enum<T>> T readOptionalEnum(Class<T> enumClass, String prompt) {
@@ -77,7 +91,7 @@ public class InputHandler {
         System.out.print(prompt);
         String input = scanner.nextLine();
         if (input.isBlank()) {
-            return null; // Optional: user left it empty
+            return null;
         }
         try {
             BigDecimal value = new BigDecimal(String.valueOf(input));
@@ -134,7 +148,7 @@ public class InputHandler {
     public static Integer readValidId(Function<Integer, Object> findByIdFunction, String prompt) {
         while (true) {
             Integer id = InputHandler.readInt(prompt);
-            String name = prompt.split("\\s+")[1]; // Extracts second word from the prompt
+            String name = prompt.split("\\s+")[1];
 
             if (findByIdFunction.apply(id) != null) {
                 return id;

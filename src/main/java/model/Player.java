@@ -34,6 +34,10 @@ public class Player {
         tickets.add(ticket);
     }
 
+    public void addReward(Reward reward) {
+        rewards.add(reward);
+    }
+
     public List<Ticket> getTickets() {
         return new ArrayList<>(tickets);
     }
