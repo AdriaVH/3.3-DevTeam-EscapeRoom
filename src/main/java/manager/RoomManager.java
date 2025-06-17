@@ -42,6 +42,7 @@ public class RoomManager {
                         r.getDifficultLevel(),
                         r.getTheme())
         );
+        System.out.println("-".repeat(60)); // footer separator
     }
 
     public void updateRoom() {

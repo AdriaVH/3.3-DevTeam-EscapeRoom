@@ -43,10 +43,11 @@ public class DecorationItemManager {
                 description = description.substring(0, 54) + "...";
             }
 
-            System.out.printf("%-4d %-20s %-10d %-12s %-20s $%-6.2f %-60s%n",
+            System.out.printf("%-4d %-20s %-10d %-12s %-20s %-6.2f€ %-60s%n",
                     i.getId(), i.getName(), i.getRoomId(), i.getMaterial(),
                     i.getTheme(), i.getPrice(), description);
         });
+        System.out.println("-".repeat(140)); // footer separator
     }
 
     public void updateDecorationItem() {

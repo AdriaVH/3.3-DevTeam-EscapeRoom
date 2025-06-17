@@ -1,8 +1,5 @@
 package manager;
 
-import exceptions.UnpaidTicketException;
-import model.Reward;
-import model.ScapeRoom;
 import model.Player;
 import repository.dao.*;
 
@@ -10,7 +7,7 @@ public class RewardManager {
 
     private final RewardDAO daoReward = new RewardDAOSQL();
 
-    public static void checkRewards(Player player, boolean hasPaidTicket, ScapeRoom scapeRoom) throws UnpaidTicketException {
+    /*public static void checkRewards(Player player, boolean hasPaidTicket, ScapeRoom scapeRoom) throws UnpaidTicketException {
         if (!hasPaidTicket) {
             throw new UnpaidTicketException(player.getName());
         }
@@ -18,10 +15,8 @@ public class RewardManager {
         Reward reward = new Reward(player.getId(), "Your reward for ScapeRoom completion");
         //player.addReward(reward);
         System.out.println("🎉 Reward to " + player.getName() + ": " + reward);
-    }
-    public void getRewardsForPlayer(int playerId) {
+    }*/
 
-    }
     public void listRewards(int playerId) {
         PlayerDAO daoPlayer = new PlayerDAOSQL();
         Player player = daoPlayer.findById(playerId);
@@ -32,7 +27,7 @@ public class RewardManager {
 
         // Header with player name
         System.out.println("Rewards for player: " + player.getName());
-        System.out.printf("%-4s %-50s%n", "ID", "Description");
+        System.out.printf("%-4s %-50s%n", "ID", "Reward");
         System.out.println("─".repeat(60)); // Adjusted separator
 
         // List rewards
@@ -41,6 +36,7 @@ public class RewardManager {
                         reward.getId(),
                         reward.getDescription() != null ? reward.getDescription() : "(No description)")
         );
+        System.out.println("-".repeat(60)); // footer separator
     }
 
 }

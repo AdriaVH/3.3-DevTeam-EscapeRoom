@@ -47,6 +47,7 @@ public class EnigmaManager {
                     e.getTheme(),
                     description);
         });
+        System.out.println("-".repeat(120)); // footer separator
     }
 
 

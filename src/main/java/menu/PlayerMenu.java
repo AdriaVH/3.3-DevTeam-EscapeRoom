@@ -2,16 +2,13 @@ package menu;
 
 import manager.PlayerManager;
 import manager.RewardManager;
-import model.Player;
-import service.PlayerService;
+import manager.TicketManager;
 import util.InputHandler;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PlayerMenu {
     private final PlayerManager playerManager = new PlayerManager();
     private final RewardManager rewardManager = new RewardManager();
+    private final TicketManager ticketManager = new TicketManager();
 
     /*public PlayerAndSalesMenu(Player currentPlayer) {
         this.userManager = new PlayerManager(currentPlayer);
@@ -54,7 +51,7 @@ public class PlayerMenu {
                 case 2 -> playerManager.signUpUserForNotifications(playerId);
                 case 3 -> playerManager.signOutScapeRoomNotifications(playerId);
                 case 4 -> rewardManager.listRewards(playerId);
-                case 5 -> System.out.println("userManager.function()");
+                case 5 -> ticketManager.listTicketsByPlayerId(playerId);
                 case 0 -> System.out.println("🔙 Returning...");
                 default -> System.out.println("❌ Invalid option.");
             }

@@ -42,10 +42,11 @@ public class ClueManager {
                 description = description.substring(0, 54) + "...";
             }
 
-            System.out.printf("%-4d %-25s %-10d %-20s $%-6.2f %-60s%n",
+            System.out.printf("%-4d %-25s %-10d %-20s %-6.2f€ %-60s%n",
                     o.getId(), o.getName(), o.getEnigmaId(),
                     o.getTheme(), o.getPrice(), description);
         });
+        System.out.println("-".repeat(130)); // footer separator
     }
 
     public void updateClue() {
