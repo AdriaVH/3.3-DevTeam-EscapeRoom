@@ -25,15 +25,16 @@ public class ScapeRoomManager {
     }
 
     public void listScapeRooms() {
-        System.out.printf("%-4s %-30s%n", "ID", "Name");
-        System.out.println("─".repeat(35)); // separator line
+        System.out.printf("%-4s %-30s %-10s%n", "ID", "Name", "Price");
+        System.out.println("─".repeat(46)); // Adjusted separator line length
 
         dao.findAll().forEach(s ->
-                System.out.printf("%-4d %-30s%n",
+                System.out.printf("%-4d %-30s %-10s%n",
                         s.getId(),
                         s.getName(),
-                        s.getTicketPrice()!= null ? s.getTicketPrice().toString() : "N/A")
+                        s.getTicketPrice() != null ? s.getTicketPrice().toString() : "N/A")
         );
+
     }
 
     public void updateScapeRoom() {
@@ -41,7 +42,8 @@ public class ScapeRoomManager {
 
         int id = InputHandler.readValidId(dao::findById,"Enter ScapeRoom ID to update: ");
         String name = InputHandler.readOptionalString("Enter new name (or press Enter to skip): ");
-        ScapeRoom obj = new ScapeRoom(id,name);
+        BigDecimal price = InputHandler.readOptionalBigDecimal("Enter new price (or press Enter to skip): ");
+        ScapeRoom obj = new ScapeRoom(id,name, price);
 
         try {
             dao.update(obj);

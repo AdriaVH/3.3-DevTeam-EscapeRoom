@@ -60,11 +60,17 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
 
     @Override
     public void update(ScapeRoom obj) {
-        executor.executeUpdate("UPDATE scaperoom SET name = ? WHERE id = ?",
+        executor.executeUpdate(
+                "UPDATE scaperoom " +
+                        "SET name = COALESCE(?, name), " +
+                        "ticket_price = COALESCE(?, ticket_price) " +
+                        "WHERE id = ?",
                 obj.getName(),
-                obj.getId(),
-                obj.getTicketPrice());
+                obj.getTicketPrice(),
+                obj.getId()
+        );
     }
+
 
     @Override
     public void delete(int id) {

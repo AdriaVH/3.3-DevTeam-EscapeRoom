@@ -14,11 +14,6 @@ public class ScapeRoom {
 
     }
 
-    public ScapeRoom(int id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
     public ScapeRoom(String name , BigDecimal ticketPrice) {
         this.name = name;
         this.ticket_Price = ticketPrice;
