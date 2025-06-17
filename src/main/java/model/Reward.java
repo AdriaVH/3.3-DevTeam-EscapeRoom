@@ -28,10 +28,9 @@ public class Reward {
 
     @Override
     public String toString() {
-        return "Reward{" +
-                "description='" + description + '\'' +
-                ", id=" + id +
-                ", player_Id=" + playerId +
-                '}';
+        return "Reward: " + "\n" +
+                "Description: " + description + "\n" +
+                "Id: " + id + "\n" +
+                "Player_Id: " + playerId + "\n";
     }
 }

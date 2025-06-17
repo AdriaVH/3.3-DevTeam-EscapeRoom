@@ -20,6 +20,7 @@ public class RoomDAOSQL implements RoomDAO {
                 room.getDifficultLevel().name(),
                 room.getTheme().name());
     }
+
 @Override
     public Room findById(int id) {
         ResultSet rs = executor.executeQuery("SELECT * FROM room WHERE id = ?", id);
@@ -36,7 +37,6 @@ public class RoomDAOSQL implements RoomDAO {
         } catch (SQLException e) {
             System.err.println("❌ Error finding Room by ID: " + e.getMessage());
         }
-
         return null;
     }
 
@@ -62,7 +62,6 @@ public class RoomDAOSQL implements RoomDAO {
         } catch (SQLException e) {
             System.err.println("❌ Error reading rooms: " + e.getMessage());
         }
-
         return rooms;
     }
 
@@ -80,8 +79,6 @@ public class RoomDAOSQL implements RoomDAO {
                 room.getTheme(),
                 room.getId());
     }
-
-
 
     @Override
     public void delete(int id) {

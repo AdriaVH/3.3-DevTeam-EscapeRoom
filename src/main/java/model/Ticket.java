@@ -31,4 +31,11 @@ public class Ticket {
         return playerId;
     }
 
+    @Override
+    public String toString() {
+        return "Ticket: " + "\n" +
+                "Id: " + id + "\n" +
+                "ScapeRoomId: " + scapeRoomId + "\n" +
+                "PlayerId: " + playerId;
+    }
 }

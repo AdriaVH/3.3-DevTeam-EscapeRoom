@@ -15,12 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerManager {
-    //private final UserObserver userObserver = new UserObserver();
     private final PlayerDAOSQL playerDAO = new PlayerDAOSQL();
-
-    /*public PlayerManager(Player currentPlayer) {
-        this.userObserver = new UserObserver(currentPlayer);
-    }*/
 
     public void buyScapeRoomTicket(int playerId){
         ScapeRoomManager scapeRoomManager = new ScapeRoomManager();
@@ -51,12 +46,6 @@ public class PlayerManager {
     }
 
         public void signUpUserForNotifications(int playerId) {
-        //PlayerDAOSQL userDAO = new PlayerDAOSQL();
-            /*List<Player> players = userDAO.findAll();
-            players.forEach(u -> System.out.println(u.getId() + ": " + u.getName()));
-
-            int userId = InputHandler.readInt("🔍 Introdueix l'ID del jugador a subscriure: ");*/
-
             Player player = playerDAO.findById(playerId);
             if(player != null) {
                 NotificationService notificationService = NotificationService.getInstance();
@@ -70,18 +59,9 @@ public class PlayerManager {
                     System.out.println(player.getName() + " is already subscribed");
                 }
             }
-            /*if (player != null) {
-                NotificationService.getInstance().attach(new UserObserver(player));
-                System.out.println(player.getName() + " has subscribed");
-            } else {
-                System.out.println("Player not found.");
-            }*/
         }
 
     public void signOutScapeRoomNotifications(int playerId){
-        /*NotificationService.getInstance().detach(userObserver);
-        System.out.println("You unsubscribed from ScapeRoom notifications");*/
-
         Player player = playerDAO.findById(playerId);
         if(player == null) {
             System.out.println("❌ Player not found.");

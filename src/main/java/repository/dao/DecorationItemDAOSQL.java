@@ -100,5 +100,4 @@ public class DecorationItemDAOSQL implements DecorationItemDAO {
         }
         return null;
     }
-
 }

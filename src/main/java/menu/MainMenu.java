@@ -8,9 +8,6 @@ public class MainMenu {
     private final ItemMenu itemMenu = new ItemMenu();
     private final PlayerMenu userMenu = new PlayerMenu();
 
-    /*public MainMenu(Player currentPlayer) {
-        this.userMenu = new PlayerAndSalesMenu(currentPlayer);
-    }*/
 
     public void start() {
         int option;

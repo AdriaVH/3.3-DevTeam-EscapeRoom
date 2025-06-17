@@ -6,17 +6,6 @@ import repository.dao.*;
 public class RewardManager {
 
     private final RewardDAO daoReward = new RewardDAOSQL();
-
-    /*public static void checkRewards(Player player, boolean hasPaidTicket, ScapeRoom scapeRoom) throws UnpaidTicketException {
-        if (!hasPaidTicket) {
-            throw new UnpaidTicketException(player.getName());
-        }
-
-        Reward reward = new Reward(player.getId(), "Your reward for ScapeRoom completion");
-        //player.addReward(reward);
-        System.out.println("🎉 Reward to " + player.getName() + ": " + reward);
-    }*/
-
     public void listRewards(int playerId) {
         PlayerDAO daoPlayer = new PlayerDAOSQL();
         Player player = daoPlayer.findById(playerId);
@@ -25,18 +14,16 @@ public class RewardManager {
             return;
         }
 
-        // Header with player name
         System.out.println("Rewards for player: " + player.getName());
         System.out.printf("%-4s %-50s%n", "ID", "Reward");
         System.out.println("─".repeat(60)); // Adjusted separator
 
-        // List rewards
         daoReward.findByPlayerId(playerId).forEach(reward ->
                 System.out.printf("%-4d %-50s%n",
                         reward.getId(),
                         reward.getDescription() != null ? reward.getDescription() : "(No description)")
         );
-        System.out.println("-".repeat(60)); // footer separator
+        System.out.println("-".repeat(60));
     }
 
 }

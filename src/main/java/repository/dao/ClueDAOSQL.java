@@ -95,5 +95,4 @@ public class ClueDAOSQL implements ClueDAO {
         }
         return null;
     }
-
 }

@@ -25,7 +25,7 @@ public class MongoExecutor {
             String dbName = dotenv.get("MONGO_DATABASE");
 
             if (uri == null || dbName == null || uri.isEmpty() || dbName.isEmpty()) {
-                throw new RuntimeException("❌ Missing MONGO_URI or MONGO_DATABASE in .env.mongo");
+                throw new RuntimeException("❌ Missing MONGO_URI or MONGO_DATABASE in .env");
             }
 
             this.client = MongoClients.create(uri);

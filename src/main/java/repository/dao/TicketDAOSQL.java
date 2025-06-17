@@ -59,7 +59,6 @@ public class TicketDAOSQL implements TicketDAO {
         } catch (SQLException e) {
             System.err.println("❌ Error reading all tickets: " + e.getMessage());
         }
-
         return tickets;
     }
 }

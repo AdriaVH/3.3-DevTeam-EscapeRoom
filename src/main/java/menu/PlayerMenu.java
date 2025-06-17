@@ -13,16 +13,6 @@ public class PlayerMenu {
     private final TicketManager ticketManager = new TicketManager();
     private final PlayerDAO dao = new PlayerDAOSQL();
 
-    /*public PlayerAndSalesMenu(Player currentPlayer) {
-        this.userManager = new PlayerManager(currentPlayer);
-    }*/
-
-    /*public void showPlayers(){
-        playerManager.listUsers();
-        InputHandler.readInt("Select a player");
-
-    }*/
-
     public void show() {
         int playerId;
         System.out.printf("%-4s %-30s%n", "ID", "Email");

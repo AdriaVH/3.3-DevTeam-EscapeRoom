@@ -8,7 +8,6 @@ public class EnvLoader {
     private static EnvLoader instance;
     private final Properties props;
 
-    // Constructor privado para evitar instanciación externa
     private EnvLoader() {
         props = new Properties();
         try (FileInputStream fis = new FileInputStream("src/main/resources/.env")) {

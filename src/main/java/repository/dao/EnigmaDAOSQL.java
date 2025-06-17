@@ -84,8 +84,6 @@ public class EnigmaDAOSQL implements EnigmaDAO {
                 obj.getId());
     }
 
-
-
     @Override
     public void delete(int id) {
         executor.executeUpdate("DELETE FROM enigma WHERE id = ?", id);

@@ -15,6 +15,7 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
     public void insert(ScapeRoom obj) {
         executor.executeUpdate("INSERT INTO scaperoom (name, ticket_price) VALUES (?,?)", obj.getName(), obj.getTicketPrice());
     }
+
     @Override
     public ScapeRoom findById(int id) {
         ResultSet rs = executor.executeQuery("SELECT * FROM scaperoom WHERE id = ?", id);
@@ -54,7 +55,6 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
         } catch (SQLException e) {
             System.err.println("❌ Error reading scaperooms: " + e.getMessage());
         }
-
         return scapeRooms;
     }
 
@@ -70,6 +70,7 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
                 obj.getId()
         );
     }
+
     public double totalPrice (int id) {
         double totalPrice = 0;
         try {
@@ -88,12 +89,13 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
                 id, // for clue
                 id  // for decorationitem
         );
+
         if (rs.next()) {
             totalPrice = rs.getDouble("total_price");
         }
+
         } catch (SQLException e) {
             System.err.println("❌ Error reading scaperooms: " + e.getMessage());
-
         }
         return totalPrice;
     }

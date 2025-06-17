@@ -58,7 +58,6 @@ public class RewardDAOSQL implements RewardDAO{
         } catch (SQLException e) {
             System.err.println("❌ Error reading all rewards: " + e.getMessage());
         }
-
         return rewards;
     }
 }
