@@ -85,9 +85,7 @@ public class PlayerManager {
     }
 
     public List<Player> listUsers() {
-
         List<Player> players = new ArrayList<>(playerDAO.findAll());
         return players;
     }
-
 }
