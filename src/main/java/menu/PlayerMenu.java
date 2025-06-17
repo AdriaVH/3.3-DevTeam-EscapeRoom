@@ -1,6 +1,7 @@
 package menu;
 
 import manager.PlayerManager;
+import manager.RewardManager;
 import model.Player;
 import service.PlayerService;
 import util.InputHandler;
@@ -10,7 +11,7 @@ import java.util.List;
 
 public class PlayerMenu {
     private final PlayerManager playerManager = new PlayerManager();
-    private final PlayerService playerService = new PlayerService();
+    private final RewardManager rewardManager = new RewardManager();
 
     /*public PlayerAndSalesMenu(Player currentPlayer) {
         this.userManager = new PlayerManager(currentPlayer);
@@ -52,7 +53,7 @@ public class PlayerMenu {
                 case 1 -> playerManager.buyScapeRoomTicket(playerId);
                 case 2 -> playerManager.signUpUserForNotifications(playerId);
                 case 3 -> playerManager.signOutScapeRoomNotifications(playerId);
-                case 4 -> playerService.getRewardsForPlayer(playerId);
+                case 4 -> rewardManager.listRewards(playerId);
                 case 5 -> System.out.println("userManager.function()");
                 case 0 -> System.out.println("🔙 Returning...");
                 default -> System.out.println("❌ Invalid option.");

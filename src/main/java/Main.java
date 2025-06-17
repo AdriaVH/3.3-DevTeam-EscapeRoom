@@ -9,15 +9,9 @@ public class Main {
         PlayerService service = new PlayerService();
 
        /*Service.addPlayer("Benito", "mail@mail.cat");
-        Player player1 = new Player("Manuelito@gmail.com","Jose");
-        Player player2 = new Player("Morenito_reshulon@hotmail.com", "Eusebio");
-        Player player = new Player("ignasi@escape.com", "Ignasi");
-        Player player3 = new Player("tonyroisterjr@drummer.cat", "Anthony");
+
         PlayerDAOSQL dao = new PlayerDAOSQL();
-        dao.insert(player1);
-        dao.insert(player2);
-        dao.insert(player3);
-        dao.insert(player);
+
        UserObserver uo1 = new UserObserver(player1);
         UserObserver uo2 = new UserObserver(player2);
         NotificationService.getInstance().attach(uo1);

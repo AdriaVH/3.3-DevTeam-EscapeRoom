@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TicketDAOSQL {
+public class TicketDAOSQL implements TicketDAO {
     private final SQLExecutor executor = SQLExecutor.getInstance();
 
     public void insert(Ticket ticket) {

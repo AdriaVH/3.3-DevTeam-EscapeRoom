@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RewardDAOSQL {
+public class RewardDAOSQL implements RewardDAO{
     private final SQLExecutor executor = SQLExecutor.getInstance();
 
     public void insert(Reward reward) {
