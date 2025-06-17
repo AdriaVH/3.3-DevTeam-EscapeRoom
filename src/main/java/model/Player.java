@@ -5,7 +5,7 @@ import rewards.Rewardable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Player implements Rewardable {
+public class Player {
     private int id;
     private String mail;
     private String name;

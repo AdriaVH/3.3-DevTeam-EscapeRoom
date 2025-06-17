@@ -3,54 +3,66 @@ package service;
 import model.Player;
 import model.Reward;
 import model.Ticket;
-import repository.dao.PlayerDAOMongo;
-import repository.dao.RewardDAOMongo;
-import repository.dao.TicketDAOMongo;
+import repository.dao.PlayerDAOSQL;
+import repository.dao.RewardDAOSQL;
+import repository.dao.TicketDAOSQL;
 
 import java.util.List;
 
 public class PlayerService {
+    private final PlayerDAOSQL playerDAO = new PlayerDAOSQL();
+    private final RewardDAOSQL rewardDAO = new RewardDAOSQL();
+    private final TicketDAOSQL ticketDAO = new TicketDAOSQL();
 
-    private final PlayerDAOMongo playerDAO = new PlayerDAOMongo();
-    private final RewardDAOMongo rewardDAO = new RewardDAOMongo();
-    private final TicketDAOMongo ticketDAO = new TicketDAOMongo();
-
-    public void addPlayer(String name, String mail) {
-        Player player = new Player(mail, name);
+    // 🔹 Crea un nou jugador
+    public void createPlayer(String player) {
         playerDAO.insert(player);
-        System.out.println("✅ Player added: " + name);
     }
 
-    public void deletePlayerByMail(String mail) {
-        playerDAO.deleteByMail(mail);
-        System.out.println("🗑️ Player deleted: " + mail);
+    // 🔹 Afegeix una recompensa a un jugador
+    public void addRewardToPlayer(int playerId, String description) {
+        Reward reward = new Reward(description, 0, playerId);
+        rewardDAO.insert(reward);
     }
 
-    public Player findByMail(String mail) {
-        return playerDAO.findByMail(mail);
+    // 🔹 Afegeix un ticket a un jugador
+    public void addTicketToPlayer(int playerId, int scapeRoomId) {
+        Ticket ticket = new Ticket(0, scapeRoomId, playerId);
+        ticketDAO.insert(ticket);
     }
 
+    // 🔹 Llista tots els jugadors
     public List<Player> getAllPlayers() {
         return playerDAO.findAll();
     }
 
-    public void addRewardToPlayer(String mail, Reward reward) {
-        reward.setPlayerMail(mail);
-        rewardDAO.insert(reward);
-        System.out.println("🎁 Reward added to: " + mail);
+    // 🔹 Llista les recompenses d’un jugador
+    public List<Reward> getRewardsForPlayer(int playerId) {
+        return rewardDAO.findByPlayerId(playerId);
     }
 
-    public void addTicketToPlayer(String playerMail, Ticket ticket) {
-        ticket.setPlayerMail(playerMail);
-        ticketDAO.insert(ticket);
-        System.out.println("🎫 Ticket added to: " + playerMail);
+    // 🔹 Llista els tiquets d’un jugador
+    public List<Ticket> getTicketsForPlayer(int playerId) {
+        return ticketDAO.findByPlayerId(playerId);
     }
 
-    public List<Reward> getRewardsForPlayer(Player player) {
-        return rewardDAO.findByPlayerMail(player.getMail());
+    // 🔹 Obté un jugador per ID
+    public Player getPlayerById(int id) {
+        return playerDAO.findById(id);
     }
 
-    public List<Ticket> getTicketsForPlayer(Player player) {
-        return ticketDAO.findByPlayerMail(player.getMail());
+    // 🔹 Elimina un jugador
+    public void deletePlayer(int id) {
+        playerDAO.delete(id);
+    }
+
+    // 🔹 Elimina una recompensa
+    public void deleteReward(int rewardId) {
+        rewardDAO.delete(rewardId);
+    }
+
+    // 🔹 Elimina un ticket
+    public void deleteTicket(int ticketId) {
+        ticketDAO.delete(ticketId);
     }
 }

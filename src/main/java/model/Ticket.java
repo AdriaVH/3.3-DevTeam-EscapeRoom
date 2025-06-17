@@ -4,45 +4,26 @@ import java.math.BigDecimal;
 
 public class Ticket {
     private int id;
-    private ScapeRoom scapeRoom;
-    private Player player;
+    private int scapeRoomId;
+    private int playerId;
 
-    public Ticket(int id, ScapeRoom scapeRoom, Player player) {
+    public Ticket(int id, int scapeRoom_Id, int player_Id) {
         this.id = id;
-        this.scapeRoom = scapeRoom;
-        this.player = player;
+        this.scapeRoomId = scapeRoom_Id;
+        this.playerId = player_Id;
     }
 
-    public Ticket(ScapeRoom scapeRoom, Player player) {
-        this.scapeRoom = scapeRoom;
-        this.player = player;
-    }
 
     public int getId() {
         return id;
     }
 
-    public String getScapeRoom() {
-        return scapeRoom.getName();
+    public int getScapeRoomId() {
+        return scapeRoomId;
     }
 
-    public String getPlayer() {
-        return player.getName();
+    public int getPlayerId() {
+        return playerId;
     }
 
-    public BigDecimal getTicketPrice(){
-        return scapeRoom.getTicketPrice();
-    }
-
-    public String getPlayerMail() {
-        return player.getMail();
-    }
-
-    public void setPlayerMail(String playerMail){
-        this.player.setMail(playerMail);
-    }
-
-    public int getScapeRoomId(){
-        return scapeRoom.getId();
-    }
 }

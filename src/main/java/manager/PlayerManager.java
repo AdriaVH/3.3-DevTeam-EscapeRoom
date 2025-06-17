@@ -6,9 +6,9 @@ import model.Ticket;
 import observer.NotificationService;
 import observer.UserObserver;
 import repository.dao.PlayerDAO;
+import repository.dao.PlayerDAOSQL;
 import repository.dao.ScapeRoomDAO;
 import repository.dao.ScapeRoomDAOSQL;
-import repository.dao.PlayerDAOMongo;
 import util.InputHandler;
 
 import java.util.ArrayList;
@@ -16,7 +16,7 @@ import java.util.List;
 
 public class PlayerManager {
     //private final UserObserver userObserver = new UserObserver();
-    private final PlayerDAOMongo userDAO = new PlayerDAOMongo();
+    private final PlayerDAOSQL userDAO = new PlayerDAOSQL();
 
     /*public PlayerManager(Player currentPlayer) {
         this.userObserver = new UserObserver(currentPlayer);
@@ -31,7 +31,7 @@ public class PlayerManager {
 
         ScapeRoomDAO dao= new ScapeRoomDAOSQL();
         ScapeRoom scapeRoom = dao.findById(scapeRoomId);
-        PlayerDAO playerDao = new PlayerDAOMongo();
+        PlayerDAO playerDao = new PlayerDAOSQL();
 
         if(scapeRoom!=null && player != null){
             Ticket ticket = new Ticket(scapeRoom,player);
@@ -43,7 +43,7 @@ public class PlayerManager {
     }
 
         public void signUpUserForNotifications(Player player) {
-        //PlayerDAOMongo userDAO = new PlayerDAOMongo();
+        //PlayerDAOSQL userDAO = new PlayerDAOSQL();
             /*List<Player> players = userDAO.findAll();
             players.forEach(u -> System.out.println(u.getId() + ": " + u.getName()));
 

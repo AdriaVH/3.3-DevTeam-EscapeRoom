@@ -1,30 +1,32 @@
 package model;
 
 public class Reward {
-    private Player player;
+    private int id;
+    private int playerId;
     private String description;
 
-    public Reward(Player player, String description) {
-        this.player = player;
+    public Reward(String description, int id, int player_Id) {
         this.description = description;
-    }
-
-    public String getPlayerMail() {
-        return player.getMail();
-    }
-
-    public void setPlayerMail(String playerMail) {
-        this.player.setMail(playerMail);
+        this.id = id;
+        this.playerId = player_Id;
     }
 
     public String getDescription() {
         return description;
     }
+    public int getId() {
+        return id;
+    }
+    public int getPlayerId() {
+        return playerId;
+    }
 
     @Override
     public String toString() {
-        return "Reward: " + "\n" +
-                "PlayerMail: " + player.getMail() + "\n" +
-                "Description: " + description;
+        return "Reward{" +
+                "description='" + description + '\'' +
+                ", id=" + id +
+                ", player_Id=" + playerId +
+                '}';
     }
 }

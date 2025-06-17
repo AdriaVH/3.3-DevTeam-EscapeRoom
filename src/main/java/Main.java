@@ -1,15 +1,19 @@
 import model.Player;
 import observer.NotificationService;
 import observer.UserObserver;
-import repository.dao.PlayerDAOMongo;
+import repository.dao.PlayerDAOSQL;
+import service.PlayerService;
 
 public class Main {
     public static void main(String[] args) {
+        */PlayerService service = new PlayerService();
+
+        service.addPlayer("Benito", "mail@mail.cat");
         Player player1 = new Player("Manuelito@gmail.com","Jose");
         Player player2 = new Player("Morenito_reshulon@hotmail.com", "Eusebio");
         Player player = new Player("ignasi@escape.com", "Ignasi");
         Player player3 = new Player("tonyroisterjr@drummer.cat", "Anthony");
-        PlayerDAOMongo dao = new PlayerDAOMongo();
+        PlayerDAOSQL dao = new PlayerDAOSQL();
         dao.insert(player1);
         dao.insert(player2);
         dao.insert(player3);
@@ -17,7 +21,7 @@ public class Main {
        UserObserver uo1 = new UserObserver(player1);
         UserObserver uo2 = new UserObserver(player2);
         NotificationService.getInstance().attach(uo1);
-        NotificationService.getInstance().attach(uo2);
+        NotificationService.getInstance().attach(uo2);/*
 
         new menu.MainMenu().start();
     }
