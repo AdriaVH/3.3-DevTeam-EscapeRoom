@@ -80,7 +80,7 @@ public class InputHandler {
             return null; // Optional: user left it empty
         }
         try {
-            BigDecimal value = new BigDecimal(input);
+            BigDecimal value = new BigDecimal(String.valueOf(input));
             if (value.compareTo(BigDecimal.ZERO) < 0) {
                 System.out.println("❌ Value cannot be negative. Please try again.");
                 return readOptionalBigDecimal(prompt);
@@ -95,7 +95,7 @@ public class InputHandler {
     public static BigDecimal readBigDecimal(String prompt) {
         System.out.print(prompt);
         try {
-            BigDecimal value = new BigDecimal(scanner.nextLine());
+            BigDecimal value = new BigDecimal(String.valueOf(scanner.nextLine()));
             if (value.compareTo(BigDecimal.ZERO) < 0) {
                 System.out.println("❌ Value cannot be negative. Please try again.");
                 return readBigDecimal(prompt);
