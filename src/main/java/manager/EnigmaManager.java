@@ -5,12 +5,13 @@ import enums.Theme;
 import model.Enigma;
 import repository.dao.EnigmaDAO;
 import repository.dao.EnigmaDAOSQL;
+import repository.dao.RoomDAO;
 import repository.dao.RoomDAOSQL;
 import util.InputHandler;
 
 public class EnigmaManager {
     private final EnigmaDAO dao = new EnigmaDAOSQL();
-    private final RoomDAOSQL roomDao = new RoomDAOSQL();
+    private final RoomDAO roomDao = new RoomDAOSQL();
 
     public void createEnigma() {
         String name = InputHandler.readString("Enter name: ");

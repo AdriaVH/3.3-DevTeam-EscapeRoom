@@ -1,13 +1,12 @@
 package menu;
 
-import model.Player;
 import util.InputHandler;
 
 public class MainMenu {
     private final ScapeRoomMenu scapeRoomMenu = new ScapeRoomMenu();
     private final RoomMenu roomMenu = new RoomMenu();
     private final ItemMenu itemMenu = new ItemMenu();
-    private final PlayerAndSalesMenu userMenu = new PlayerAndSalesMenu();
+    private final PlayerMenu userMenu = new PlayerMenu();
 
     /*public MainMenu(Player currentPlayer) {
         this.userMenu = new PlayerAndSalesMenu(currentPlayer);

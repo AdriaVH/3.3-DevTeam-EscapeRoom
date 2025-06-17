@@ -11,6 +11,7 @@ import repository.dao.ScapeRoomDAOSQL;
 import repository.dao.PlayerDAOMongo;
 import util.InputHandler;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerManager {
@@ -21,7 +22,7 @@ public class PlayerManager {
         this.userObserver = new UserObserver(currentPlayer);
     }*/
 
-    public void buyScapeRoomTicket(int id){
+    public void buyScapeRoomTicket(Player player){
         ScapeRoomManager scapeRoomManager = new ScapeRoomManager();
         System.out.println("Disponible ScapeRoom");
         scapeRoomManager.listScapeRooms();
@@ -31,7 +32,6 @@ public class PlayerManager {
         ScapeRoomDAO dao= new ScapeRoomDAOSQL();
         ScapeRoom scapeRoom = dao.findById(scapeRoomId);
         PlayerDAO playerDao = new PlayerDAOMongo();
-        Player player = playerDao.findById(id);
 
         if(scapeRoom!=null && player != null){
             Ticket ticket = new Ticket(scapeRoom,player);
@@ -42,13 +42,12 @@ public class PlayerManager {
         System.out.println("❌ Unknown ScapeRoom or Player not found.");
     }
 
-        public void signUpUserForNotifications(int id) {
+        public void signUpUserForNotifications(Player player) {
         //PlayerDAOMongo userDAO = new PlayerDAOMongo();
             /*List<Player> players = userDAO.findAll();
             players.forEach(u -> System.out.println(u.getId() + ": " + u.getName()));
 
             int userId = InputHandler.readInt("🔍 Introdueix l'ID del jugador a subscriure: ");*/
-            Player player = userDAO.findById(id);
 
             if(player != null) {
                 NotificationService notificationService = NotificationService.getInstance();
@@ -70,10 +69,9 @@ public class PlayerManager {
             }*/
         }
 
-    public void signOutScapeRoomNotifications(int id){
+    public void signOutScapeRoomNotifications(Player player){
         /*NotificationService.getInstance().detach(userObserver);
         System.out.println("You unsubscribed from ScapeRoom notifications");*/
-        Player player = userDAO.findById(id);
 
         if(player == null) {
             System.out.println("❌ Player not found.");
@@ -96,15 +94,10 @@ public class PlayerManager {
         }
     }
 
-    public void listUsers() {
-        System.out.printf("%-4s %-30s%n", "ID", "Name");
-        System.out.println("─".repeat(35)); // separator line
+    public List<Player> listUsers() {
 
-        userDAO.findAll().forEach(s ->
-                System.out.printf("%-4d %-30s%n",
-                        s.getId(),
-                        s.getName(),
-                        s.getMail())
-        );
+        List<Player> players = new ArrayList<>(userDAO.findAll());
+        return players;
     }
+
 }

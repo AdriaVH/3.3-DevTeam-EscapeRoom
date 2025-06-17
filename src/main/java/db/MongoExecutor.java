@@ -18,7 +18,7 @@ public class MongoExecutor {
             System.setProperty("jdk.tls.client.protocols", "TLSv1.2");
 
             Dotenv dotenv = Dotenv.configure()
-                    .filename(".env.mongo")
+                    .filename(".env")
                     .load();
 
             String uri = dotenv.get("MONGO_URI");

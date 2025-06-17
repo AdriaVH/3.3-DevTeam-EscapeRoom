@@ -46,11 +46,11 @@ public class PlayerService {
         System.out.println("🎫 Ticket added to: " + playerMail);
     }
 
-    public List<Reward> getRewardsForPlayer(String mail) {
-        return rewardDAO.findByPlayerMail(mail);
+    public List<Reward> getRewardsForPlayer(Player player) {
+        return rewardDAO.findByPlayerMail(player.getMail());
     }
 
-    public List<Ticket> getTicketsForPlayer(String mail) {
-        return ticketDAO.findByPlayerMail(mail);
+    public List<Ticket> getTicketsForPlayer(Player player) {
+        return ticketDAO.findByPlayerMail(player.getMail());
     }
 }
