@@ -77,7 +77,7 @@ public class InputHandler {
         while (true) {
             String input = scanner.nextLine().trim().toUpperCase();
             if (input.isBlank()) {
-                return null; // Optional: user left it empty
+                return null;
             }
             try {
                 return Enum.valueOf(enumClass, input);

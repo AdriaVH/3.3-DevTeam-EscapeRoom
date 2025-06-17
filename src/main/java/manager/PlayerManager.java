@@ -15,33 +15,7 @@ import java.util.List;
 public class PlayerManager {
     private final PlayerDAOSQL playerDAO = new PlayerDAOSQL();
 
-    /*public void buyScapeRoomTicket(int playerId) {
-        ScapeRoomManager scapeRoomManager = new ScapeRoomManager();
-        System.out.println("Available ScapeRooms");
-        scapeRoomManager.listScapeRooms();
 
-        int scapeRoomId = InputHandler.readInt("Enter ScapeRoom ID: ");
-
-        ScapeRoomDAO dao = new ScapeRoomDAOSQL();
-        ScapeRoom scapeRoom = dao.findById(scapeRoomId);
-        Player player = playerDAO.findById(playerId);
-
-        if (scapeRoom != null && player != null) {
-            Ticket ticket = new Ticket(scapeRoom.getId(), player.getId());
-            //function with -> IF there is a ticket with same ScapeRoomId and same PlayerId
-            //then NO MAKE, and give error
-
-
-            //BULLSHIT, this should DAO it to the DDBB not locally to the player
-            player.addTicket(ticket); //WRONG
-
-            System.out.println(player.getName() + " has bought a ticket for '" + scapeRoom.getName() +
-                    "' for: " + scapeRoom.getTicketPrice() + " €");
-        }
-        System.out.println("❌ Unknown ScapeRoom or Player not found.");
-        //MAKE IT AN EXCEPTION AND NOT THIS HORSESHIT
-
-    }*/
     public void buyScapeRoomTicket(int playerId) {
         ScapeRoomManager scapeRoomManager = new ScapeRoomManager();
         ScapeRoomDAO scapeRoomDao = new ScapeRoomDAOSQL();
@@ -64,7 +38,7 @@ public class PlayerManager {
         TicketDAO ticketDao = new TicketDAOSQL();
 
 
-        // Create and insert the ticket
+
         Ticket ticket = new Ticket(scapeRoomId, playerId);
         ticketDao.insert(ticket);
 
