@@ -51,6 +51,7 @@ public class Player {
     }
 
     public void setMail(String mail) {
+
         this.mail = mail;
     }
 
@@ -59,6 +60,7 @@ public class Player {
     }
 
     public void setName(String name) {
+
         this.name = name;
     }
 

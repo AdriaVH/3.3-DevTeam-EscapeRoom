@@ -31,7 +31,7 @@ public class MongoExecutor {
             this.client = MongoClients.create(uri);
             this.database = client.getDatabase(dbName);
 
-            // Optional ping test
+
             Document ping = new Document("ping", 1);
             database.runCommand(ping);
             System.out.println("✅ Connected to MongoDB database: " + dbName);
