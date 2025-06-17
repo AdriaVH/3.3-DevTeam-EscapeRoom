@@ -24,10 +24,9 @@ public class RewardDAOSQL {
         try {
             while (rs != null && rs.next()) {
                 Reward reward = new Reward(
-                        rs.getString("description"),
                         rs.getInt("id"),
-                        rs.getInt("player_id")
-                );
+                        rs.getInt("player_id"),
+                        rs.getString("description"));
                 rewards.add(reward);
             }
         } catch (SQLException e) {
@@ -50,10 +49,10 @@ public class RewardDAOSQL {
         try {
             while (rs != null && rs.next()) {
                 Reward reward = new Reward(
-                        rs.getString("description"),
+
                         rs.getInt("id"),
-                        rs.getInt("player_id")
-                );
+                        rs.getInt("player_id"),
+                        rs.getString("description"));
                 rewards.add(reward);
             }
         } catch (SQLException e) {

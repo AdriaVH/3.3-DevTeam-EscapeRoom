@@ -5,7 +5,12 @@ public class Reward {
     private int playerId;
     private String description;
 
-    public Reward(String description, int id, int player_Id) {
+    public Reward(int id, int player_Id, String description) {
+        this.description = description;
+        this.id = id;
+        this.playerId = player_Id;
+    }
+    public Reward(int player_Id, String description) {
         this.description = description;
         this.id = id;
         this.playerId = player_Id;

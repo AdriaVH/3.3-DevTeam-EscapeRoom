@@ -25,17 +25,22 @@ public class ScapeRoomManager {
     }
 
     public void listScapeRooms() {
-        System.out.printf("%-4s %-30s %-10s%n", "ID", "Name", "Price");
-        System.out.println("─".repeat(46)); // Adjusted separator line length
+        System.out.printf("%-4s %-30s %-10s %-12s%n", "ID", "Name", "Ticket", "Total cost");
+        System.out.println("─".repeat(60)); // Adjusted separator length
 
-        dao.findAll().forEach(s ->
-                System.out.printf("%-4d %-30s %-10s%n",
-                        s.getId(),
-                        s.getName(),
-                        s.getTicketPrice() != null ? s.getTicketPrice().toString() : "N/A")
-        );
+        dao.findAll().forEach(s -> {
 
+            Double totalPrice = s.getTotalPrice();
+
+            System.out.printf("%-4d %-30s %-10s %-12s%n",
+                    s.getId(),
+                    s.getName(),
+                    s.getTicketPrice() != null ? String.format("%.2f €", s.getTicketPrice()) : "N/A",
+                    s.getTotalPrice() + " €"
+            );
+        });
     }
+
 
     public void updateScapeRoom() {
         listScapeRooms();
@@ -67,5 +72,9 @@ public class ScapeRoomManager {
                 RuntimeException e) {
             System.out.println("Error deleting EscapeRoom with id = " + e.getMessage());
         }
+    }
+
+    public double getTotalPrice (int id) {
+        return dao.totalPrice(id);
     }
 }

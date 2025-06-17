@@ -13,6 +13,11 @@ public class Ticket {
         this.playerId = player_Id;
     }
 
+    public Ticket(int scapeRoom_Id, int player_Id) {
+        this.scapeRoomId = scapeRoom_Id;
+        this.playerId = player_Id;
+    }
+
 
     public int getId() {
         return id;

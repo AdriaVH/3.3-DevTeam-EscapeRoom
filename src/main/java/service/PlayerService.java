@@ -15,13 +15,13 @@ public class PlayerService {
     private final TicketDAOSQL ticketDAO = new TicketDAOSQL();
 
     // 🔹 Crea un nou jugador
-    public void createPlayer(String player) {
+    public void createPlayer(Player player) {
         playerDAO.insert(player);
     }
 
     // 🔹 Afegeix una recompensa a un jugador
     public void addRewardToPlayer(int playerId, String description) {
-        Reward reward = new Reward(description, 0, playerId);
+        Reward reward = new Reward(playerId, description);
         rewardDAO.insert(reward);
     }
 

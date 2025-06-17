@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlayerDAOSQL {
+public class PlayerDAOSQL implements PlayerDAO {
     private final SQLExecutor executor = SQLExecutor.getInstance();
 
     public void insert(Player player) {

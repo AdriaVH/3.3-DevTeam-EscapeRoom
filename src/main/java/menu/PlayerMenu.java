@@ -24,16 +24,17 @@ public class PlayerMenu {
 
     public void show() {
         int playerId;
-        List<Player> players = new ArrayList<>(playerManager.listUsers());
         System.out.printf("%-4s %-30s%n", "ID", "Email");
-        System.out.println("─".repeat(35)); // separator line
+        System.out.println("─".repeat(35)); // header separator
 
-        for (int i = 0; i < players.size(); i++) {
-            System.out.printf("%-4d %-30s%n", i, players.get(i).getMail());
-        }
+        playerManager.listUsers().forEach(player ->
+                System.out.printf("%-4d %-30s%n", player.getId(), player.getMail())
+        );
+
+        System.out.println("-".repeat(35)); // footer separator
 
 
-        playerId = InputHandler.readInt("Select a player"); //canviar el mode de selecció
+        playerId = InputHandler.readInt("Select a player: "); //canviar el mode de selecció
 
 
         int option;
@@ -48,10 +49,10 @@ public class PlayerMenu {
             option = InputHandler.readInt("Choose an option: ");
 
             switch (option) {
-                case 1 -> playerManager.buyScapeRoomTicket(players.get(playerId));
-                case 2 -> playerManager.signUpUserForNotifications(players.get(playerId));
-                case 3 -> playerManager.signOutScapeRoomNotifications(players.get(playerId));
-                case 4 -> playerService.getRewardsForPlayer(players.get(playerId));
+                case 1 -> playerManager.buyScapeRoomTicket(playerId);
+                case 2 -> playerManager.signUpUserForNotifications(playerId);
+                case 3 -> playerManager.signOutScapeRoomNotifications(playerId);
+                case 4 -> playerService.getRewardsForPlayer(playerId);
                 case 5 -> System.out.println("userManager.function()");
                 case 0 -> System.out.println("🔙 Returning...");
                 default -> System.out.println("❌ Invalid option.");

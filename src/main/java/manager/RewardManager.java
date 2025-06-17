@@ -11,8 +11,8 @@ public class RewardManager {
             throw new UnpaidTicketException(player.getName());
         }
 
-        Reward reward = new Reward(player, "Your reward for ScapeRoom completion");
-        player.addReward(reward);
+        Reward reward = new Reward(player.getId(), "Your reward for ScapeRoom completion");
+        //player.addReward(reward);
         System.out.println("🎉 Reward to " + player.getName() + ": " + reward);
     }
 }

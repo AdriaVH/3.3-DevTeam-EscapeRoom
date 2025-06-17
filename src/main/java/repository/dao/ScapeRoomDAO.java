@@ -9,5 +9,6 @@ public interface ScapeRoomDAO {
     void update(ScapeRoom obj);
     void delete(int id);
     ScapeRoom findById(int id);
+    public double totalPrice (int id);
 
 }

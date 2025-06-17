@@ -1,5 +1,8 @@
 package model;
 
+import repository.dao.ScapeRoomDAO;
+import repository.dao.ScapeRoomDAOSQL;
+
 import java.math.BigDecimal;
 
 public class ScapeRoom {
@@ -43,6 +46,10 @@ public class ScapeRoom {
         this.ticket_Price = ticketPrice;
     }
 
+    public double getTotalPrice () {
+        ScapeRoomDAO dao = new ScapeRoomDAOSQL();
+        return dao.totalPrice(id);
+    }
     @Override
     public String toString() {
         return "ScapeRoom: " + name + "\n" +

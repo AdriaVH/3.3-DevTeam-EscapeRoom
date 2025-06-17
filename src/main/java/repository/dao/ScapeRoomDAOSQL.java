@@ -70,6 +70,33 @@ public class ScapeRoomDAOSQL implements ScapeRoomDAO {
                 obj.getId()
         );
     }
+    public double totalPrice (int id) {
+        double totalPrice = 0;
+        try {
+            ResultSet rs = executor.executeQuery(
+                "SELECT SUM(price) AS total_price " +
+                        "FROM (" +
+                        "SELECT c.price FROM clue c " +
+                        "JOIN enigma e ON c.enigma_id = e.id " +
+                        "JOIN room r ON e.room_id = r.id " +
+                        "WHERE r.scape_room_id = ? " +
+                        "UNION ALL " +
+                        "SELECT d.price FROM decorationitem d " +
+                        "JOIN room r ON d.room_id = r.id " +
+                        "WHERE r.scape_room_id = ?" +
+                        ") AS combined",
+                id, // for clue
+                id  // for decorationitem
+        );
+        if (rs.next()) {
+            totalPrice = rs.getDouble("total_price");
+        }
+        } catch (SQLException e) {
+            System.err.println("❌ Error reading scaperooms: " + e.getMessage());
+
+        }
+        return totalPrice;
+    }
 
 
     @Override
