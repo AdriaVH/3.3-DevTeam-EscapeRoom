@@ -54,7 +54,7 @@ public class SQLExecutor {
             return affectedRows;
         } catch (SQLException e) {
             System.err.println("❌ SQLExecutor.executeUpdate failed: " + e.getMessage());
-            return -1;
+            throw new RuntimeException(e);
         }
     }
 
