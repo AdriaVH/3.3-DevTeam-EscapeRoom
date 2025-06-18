@@ -46,7 +46,7 @@ All SQL interactions use `PreparedStatement` and JDBC best practices.
 
 ## Uml
 
-![UML_Diagram](UML 3.0.png)
+![UML_Diagram](UML_3.0.png)
 
 
 # 🗃️ SQL Data Model
@@ -56,8 +56,9 @@ The MySQL schema includes:
 - `ScapeRoom` → `Room` → `Item` → (`Enigma`, `DecorationItem`, `Clue`)
 - `Reward` and `Ticket` are linked to `Player` via email
 - Foreign key constraints and auto-incremented IDs ensure integrity
+ for the complete SQL schema.
 
-> See [`scaperoom.sql`](./scaperoom.sql) for the complete SQL schema
+
 
 ## 🛠️ Tech Stack
 
